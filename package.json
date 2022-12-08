@@ -12,7 +12,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue3-seamless-scroll": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
