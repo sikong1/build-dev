@@ -1,69 +1,42 @@
 <!--
  * @Author: sikonggpw 1327325804@qq.com
- * @Date: 2022-10-27 23:39:54
+ * @Date: 2022-12-07 10:49:38
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2022-12-08 16:16:38
+ * @LastEditTime: 2022-12-26 23:35:12
  * @FilePath: \snow-vue\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="box">
-    <Scroll :getNextPageData="getNextPageData">
-      <ul>
-        <li v-for="(item, index) in list" :key="index">{{item}}</li>
-      </ul>
-    </Scroll>
+  <div>
+    
   </div>
-</template> 
+</template>
 
 <script>
-import Scroll from './pages/scroll/index.vue'
+  import { deepClone } from '../deepClone'
 export default {
-  components: { Scroll },
+  name: 'SnowVueApp',
 
   data() {
     return {
-      list: []
-    }
+    };
   },
 
   mounted() {
-    this.getData()
+    const obj1 = {
+      a: 1,
+      b: 2,
+    }
+    const obj = deepClone(obj1)
+    console.log(obj === obj1, 'obj === this.obj')
   },
 
   methods: {
-    getData() {
-      setTimeout(() => {
-        this.list.push(...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-      }, 300)
-    },
-
-    // 获取下一页数据
-    getNextPageData() {
-      this.getData()
-    }
-  }
-}
+    
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.box {
-  width: 300px;
-  height: 500px;
-  margin: 100px auto;
-  
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-    }
-  }
-}
 </style>
