@@ -6,6 +6,8 @@
 
 <script>
 export default {
+  name: 'SnowVueApp',
+
   data() {
     return {
       
