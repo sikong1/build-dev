@@ -17,3 +17,29 @@ export function getRandomArr(arr: any[], num: number) {
   }
   return addArr
 }
+
+export function floatAdd(text1, text2) {
+  const a = parseFloat(text1);
+  const b = parseFloat(text2);
+
+  if (Number.isNaN(a) || Number.isNaN(b)) return '';
+
+  let c;
+  let d;
+
+  try {
+    c = a.toString().split('.')[1].length;
+  } catch (error) {
+    c = 0;
+  }
+
+  try {
+    d = b.toString().split('.')[1].length;
+  } catch (error) {
+    d = 0;
+  }
+
+  const e = 10 ** Math.max(c, d);
+
+  return (floatMul(a, e) + floatMul(b, e)) / e;
+}
