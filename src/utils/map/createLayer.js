@@ -4,6 +4,7 @@ import { layerEnum } from './appEnum'
 // 创建图层
 export async function createLayer(data) {
   try {
+    // 获取模块
     data.serviceUrl = process.env.NODE_ENV == "development" || data.type === 'Scene' ? data.serviceUrl : data.formal;
     let layer = null;
     const options = {
@@ -72,12 +73,12 @@ export async function createLayer(data) {
             ymax: 24.907266362752466,
             spatialReference
           },
-          getTileUrl(level, row, col) {
-            return this.urlTemplate
-              .replace("{level}", level + 1)
-              .replace("{row}", row)
-              .replace("{col}", col);
-          }
+          // getTileUrl(level, row, col) {
+          //   return this.urlTemplate
+          //     .replace("{level}", level + 1)
+          //     .replace("{row}", row)
+          //     .replace("{col}", col);
+          // }
         });}
         // } else {
         //   layer = new Layer({

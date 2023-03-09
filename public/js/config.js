@@ -4,18 +4,24 @@ window.mapConfig = {
     id: "3a03edca-b831-5991-64ee-6dac265c72xx",
     // serviceUrl: "http://10.23.123.25:8888/arcgis/rest/services/CGCS2000/DOMMAP/MapServer/tile/{level}/{row}/{col}",
     serviceUrl: "https://gisapp.xmghszzx.com:8030/gisProxy25/rest/services/CGCS2000/DOMMAP/MapServer/tile/{level}/{row}/{col}",
+    // 形式化的地图形式url
     formal:
     "http://10.192.10.45:8320/xmgis/api/platform/layer-request/3a05bd4f-02ff-7c3b-5180-e38871bb238c/xmgis/api/data-sharing/layer-request/3a03edca-b831-5991-64ee-6dac265c72da/arcgis/rest/services/CGCS2000/DOMMAP/MapServer/tile/{level}/{row}/{col}",
     title: "影像底图2000-2d-背景滤镜",
     type: "WebTile",
+    // CSS滤镜效果 模糊和灰度
     effect:"blur(9px) grayscale(0.8)",
+    // 图层类型
     layerType: 8,
     opacity: 100,
+    // 图层样式 2d 3d
     layerStyle: "2d",
+    // 空间参考信息 4490坐标系
     spatialReference: {
       wkid: 4490
     },
     visible: true,
+    // 地图切片级别 由数字、级别值、分辨率和比例尺组成
     lods: [
       {
         level: 0,

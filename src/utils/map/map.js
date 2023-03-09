@@ -6,9 +6,12 @@ import config from './appConfig'
 const win = window;
 export const init = () => {
   return new Promise((resolve) => {
+    // 加载css
     loadCss('/library/4.18/esri/css/main.css');
     getModules(["esri/config"]).then((modules) => {
+      // 加载配置
       const [config] = modules;
+      // 加载字体
       config.fontsUrl = '/library/ArcGIS_pbf_Font';
       config.log.level = "none";
       resolve(true);
@@ -28,29 +31,41 @@ export const getModules = (modules) => {
 // 生成二维地图
 export async function create2DView() {
   try {
+    // 获取模块
     const [BaseMap, Map, MapView] = await getModules(["esri/Basemap", "esri/Map", "esri/views/MapView"]);
+    // 创建底图
     const baseLayers = await createLayers2d();
     const baseMap = new BaseMap({
       baseLayers: baseLayers
     });
+    // 创建地图
     const map = new Map({
       basemap: baseMap
     });
+    // 创建视图
     const option = twoDimensionalOption;
-    // option.container = "map";
+    // 地图切换的时候，判断是否是2d地图，如果是2d地图，就把地图容器赋值给option.container
     if (win.config.DefaultMapType === "2d") {
       console.log(win.config)
       option.container = win.config.mapContainer;
     }
     option.map = map;
+    // MapView 是把 Map 渲染成 2D 地图 。而 SceneView 则是把 Map 渲染成 3D 地图。
+    // 必须接受一个 Map 对象作为参数，不然绘制不出来地图。
     const view2D = new MapView(option);
+    // 隐藏地图控件
     view2D.ui.remove("attribution");
     view2D.ui.empty("top-left");
     view2D.ui.empty("top-right");
+    // 设置地图背景色
     map.ground.surfaceColor = '#162733';
+    // 设置地图弹窗
     view2D.popup.autoOpenEnabled = true;
+    // 设置地图弹窗样式
     config.esriInstance.view2D = view2D;
+    // 设置地图
     config.esriInstance.map2D = map;
+    // 设置地图视图
     config.mapView = view2D;
     if (win.config.DefaultMapType == "2d") {
       config.esriInstance.is3D = false;
@@ -92,7 +107,7 @@ export async function create2DView() {
     }
   } catch (error) {
     console.log(error);
-  }
+  } 
 }
 
 // 创建图层组2D
