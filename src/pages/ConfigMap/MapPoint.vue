@@ -41,7 +41,9 @@ export default {
           "eventStatusList": [],
           "reportContact": "总管理员",
           "reportContactWay": "17034642888",
+          // eslint-disable-next-line no-dupe-keys
           "longitude": "118.142186",
+          // eslint-disable-next-line no-dupe-keys
           "latitude": "24.515664",
           "coordinateStatus": 1,
           "recId": "1601186968557789184"

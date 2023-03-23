@@ -760,6 +760,7 @@ window.mapConfig = {
     },
     visible: true,
   },
+  // 这是一个遮罩层，用来遮罩掉地图上的其他图层
   region: {
     id: "mapMaskLayer",
     serviceUrl: "https://gisapp.xmghszzx.com:8030/gisProxy51/rest/services/Current/ZFW_GLWG/MapServer/1",

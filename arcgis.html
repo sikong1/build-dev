@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>ArcGIS API for JavaScript StreamLayer Example</title>
+
+    <!-- 引入 ArcGIS API 的相关库 -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.24/"></script>
+
+    <!-- 配置 API 的访问凭证 -->
+    <script>
+      require([
+        "esri/config",
+        "esri/identity/IdentityManager"
+      ], function (esriConfig, IdentityManager) {
+        esriConfig.apiKey = "YOUR_API_KEY_HERE";
+        IdentityManager.registerToken({
+          server: "https://<YOUR_SERVER_NAME>.maps.arcgis.com",
+          token: "YOUR_TOKEN_HERE",
+          expires: 1800
+        });
+      });
+    </script>
+
+    <style>
+      #viewDiv {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/StreamLayer"
+      ], function (Map, MapView, StreamLayer) {
+        const streamLayer = new StreamLayer({
+          url: "https://<YOUR_SERVER_NAME>.maps.arcgis.com/home/item.html?id=<YOUR_ITEM_ID>",
+          purgeOptions: {
+            displayCount: 100000,
+            age: 1800000
+          },
+          definitionExpression: "1=1"
+        });
+
+        const map = new Map({
+          basemap: "topo-vector",
+          layers: [streamLayer]
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-118.80500, 34.02700],
+          zoom: 13
+        });
+      });
+    </script>
+  </body>
+</html>

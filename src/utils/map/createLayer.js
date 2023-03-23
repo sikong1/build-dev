@@ -4,9 +4,10 @@ import { layerEnum } from './appEnum'
 // 创建图层
 export async function createLayer(data) {
   try {
-    // 获取模块
+    // 
     data.serviceUrl = process.env.NODE_ENV == "development" || data.type === 'Scene' ? data.serviceUrl : data.formal;
     let layer = null;
+    // 图层参数
     const options = {
       url: data.serviceUrl,
       outFields: ["*"],
@@ -14,6 +15,7 @@ export async function createLayer(data) {
         wkid: 4490
       }
     };
+    // 加载图层模块
     const Layer = await getLayerModule(data.layerType);
     switch (data.layerType) {
       case layerEnum.MapImage:
