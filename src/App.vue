@@ -2,17 +2,21 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-03-16 09:55:39
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-03-23 22:39:15
+ * @LastEditTime: 2023-03-25 14:38:15
  * @FilePath: \snow-vue\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="underline">
-    <span>开办费方面军的出纳付款计划正式放假啊的L<br />KJDCJSDFIJEFEKHADFSOJAKFH<br />ISDVFAKJSDFKAJHDSIUAHFLIAUHFLIUAHFLIUH</span>
+  <div>
+    <div v-html="setText('我是中国人AAAAA')"></div>
   </div>
 </template>
 
 <script>
+import pinyin from 'pinyin'
+// 匹配从a-z,A-Z,0-9
+const rep = /[a-zA-Z0-9]/;
+
 export default {
   name: 'SnowVueApp',
 
@@ -22,8 +26,24 @@ export default {
     };
   },
 
-  mounted() {
+  computed: {
+    setText() {
+      return (val) => {
+        let textVal = ''
+        val.split('').forEach((item) => {
+          // 如果在正则内部，则不用转换拼音
+          if (rep.test(item)) {
+            return textVal += item;
+          }
+          const pinyinArr = pinyin(item);
+          textVal += `<ruby>${item}<rp>(</rp><rt>${pinyinArr[0]}</rt><rp>)</rp></ruby> &nbsp;&nbsp;`
+        });
+        return textVal;
+      }
+    }
+  },
 
+  mounted() {
   },
 
   methods: {
@@ -32,19 +52,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.underline {
-  span {
-    font-size: 25px;
-    line-height: 2;
-    background: linear-gradient(to right, #EC695C, #61C454) no-repeat right bottom;
-    background-size: 0 2px;
-    transition: background-size 1300ms;
-
-    &:hover {
-      background-position-x: left;
-      background-size: 100% 2px;
-    }
-  }
+<style lang="scss">
+rt {
+  font-size: 12px;
+  color: green;
 }
 </style>

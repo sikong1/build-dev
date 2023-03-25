@@ -17,6 +17,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "esri-loader": "^3.6.0",
+    "pinyin": "^3.0.0-alpha.5",
     "prettier": "^2.7.1",
     "tesseract.js": "^4.0.2",
     "three": "^0.148.0",
