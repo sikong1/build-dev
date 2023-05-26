@@ -1,60 +1,25 @@
 <!--
  * @Author: sikonggpw 1327325804@qq.com
- * @Date: 2023-03-16 09:55:39
+ * @Date: 2022-10-27 23:39:54
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-03-25 14:38:15
+ * @LastEditTime: 2022-10-28 00:08:47
  * @FilePath: \snow-vue\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
-    <div v-html="setText('我是中国人AAAAA')"></div>
+    <SnowItem />
   </div>
-</template>
+</template> 
 
 <script>
-import pinyin from 'pinyin'
-// 匹配从a-z,A-Z,0-9
-const rep = /[a-zA-Z0-9]/;
-
+import SnowItem from './pages/snow/index.vue'
 export default {
-  name: 'SnowVueApp',
+  components: { SnowItem }
 
-  data() {
-    return {
-
-    };
-  },
-
-  computed: {
-    setText() {
-      return (val) => {
-        let textVal = ''
-        val.split('').forEach((item) => {
-          // 如果在正则内部，则不用转换拼音
-          if (rep.test(item)) {
-            return textVal += item;
-          }
-          const pinyinArr = pinyin(item);
-          textVal += `<ruby>${item}<rp>(</rp><rt>${pinyinArr[0]}</rt><rp>)</rp></ruby> &nbsp;&nbsp;`
-        });
-        return textVal;
-      }
-    }
-  },
-
-  mounted() {
-  },
-
-  methods: {
-
-  },
-};
+}
 </script>
 
-<style lang="scss">
-rt {
-  font-size: 12px;
-  color: green;
-}
+<style lang="scss" scoped>
+
 </style>
