@@ -1,7 +1,11 @@
 <template>
   <div>
-    <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{ routerTitle(item) }}</button>
-    <router-view></router-view>
+    <div style="margin-bottom: 8px;">婷</div>
+    <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
+      routerTitle(item) }}</button>
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -23,7 +27,7 @@ onMounted(() => {
   const routerItems = router.options.routes;
   const appRouter = routerItems.find((item) => item.name === 'index');
   appRouter && (routers.value = appRouter.children);
-  console.log(routers.value,'routersrouters');
+  console.log(routers.value, 'routersrouters');
 })
 
 
