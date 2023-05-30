@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import scroll from '@/pages/scroll'
+import scroll from '@/components/scroll'
 export default {
   name: 'ScrollIndex',
   props: {

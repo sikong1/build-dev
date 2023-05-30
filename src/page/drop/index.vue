@@ -19,55 +19,54 @@
 <script>
 export default {
   name: 'SnowVueIndex',
-
-  data() {
-    return {
-      suorceNode: null
-    };
-  },
-
-  mounted() {
-    this.init()
-  },
-
-  methods: {
-    init() {
-      const list = document.querySelector('.list')
-      list.ondragstart = e => {
-        setTimeout(() => {
-          e.target.classList.add('moving')
-        }, 0)
-        this.suorceNode = e.target
-        e.dataTransfer.effectAllowed = 'move'
-      }
-
-      list.ondragover = e => {
-        e.preventDefault()
-      }
-      
-      list.ondragenter = e => {
-        e.preventDefault();
-        if (e.target === list || e.target === this.suorceNode) {
-          return;
-        }
-        const children = Array.from(list.children)
-        const suorceIndex = children.indexOf(this.suorceNode)
-        const targetIndex = children.indexOf(e.target)
-        if (suorceIndex > targetIndex) {
-          // console.log('向上');
-          list.insertBefore(this.suorceNode, e.target)
-        } else {
-          // console.log('向下');
-          list.insertBefore(this.suorceNode, e.target.nextElementSibling)
-        }
-      }
-
-      list.ondragend = e => {
-        e.target.classList.remove('moving');
-      }
-    }
-  },
 };
+</script>
+
+<script setup>
+import { onMounted, ref } from 'vue';
+
+
+const suorceNode = ref(null)
+
+onMounted(() => {
+  init()
+})
+
+const init = () => {
+  const list = document.querySelector('.list')
+  list.ondragstart = e => {
+    setTimeout(() => {
+      e.target.classList.add('moving')
+    }, 0)
+    suorceNode.value = e.target
+    e.dataTransfer.effectAllowed = 'move'
+  }
+
+  list.ondragover = e => {
+    e.preventDefault()
+  }
+
+  list.ondragenter = e => {
+    e.preventDefault();
+    if (e.target === list || e.target === suorceNode.value) {
+      return;
+    }
+    const children = Array.from(list.children)
+    const suorceIndex = children.indexOf(suorceNode.value)
+    const targetIndex = children.indexOf(e.target)
+    if (suorceIndex > targetIndex) {
+      // console.log('向上');
+      list.insertBefore(suorceNode.value, e.target)
+    } else {
+      // console.log('向下');
+      list.insertBefore(suorceNode.value, e.target.nextElementSibling)
+    }
+  }
+
+  list.ondragend = e => {
+    e.target.classList.remove('moving');
+  }
+}
 </script>
 
 <style lang="scss" scoped>

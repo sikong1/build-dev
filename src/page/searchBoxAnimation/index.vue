@@ -21,25 +21,26 @@
 <script>
 export default {
   name: 'SnowItem',
-  data() {
-    return {
-      inputText: ''
-    }
-  },
-  mounted() {
-  },
-  methods: {
-    setWidth() {
-      this.$refs.seach.classList.toggle('changeWidth')
-    },
-    clearWidth() {
-      this.$refs.seach.classList.remove('changeWidth')
-      this.inputText = ''
-    },
-    delText() {
-      this.inputText = ''
-    }
-  }
+}
+</script>
+
+<script setup>
+import { ref } from 'vue';
+
+
+const inputText = ref('')
+
+const setWidth = () => {
+  const seach = document.querySelector('.seach')
+  seach.classList.toggle('changeWidth')
+}
+const clearWidth = () => {
+  const seach = document.querySelector('.seach')
+  seach.classList.remove('changeWidth')
+  inputText.value = ''
+}
+const delText = () => {
+  inputText.value = ''
 }
 </script>
 

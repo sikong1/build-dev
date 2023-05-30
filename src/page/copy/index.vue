@@ -16,7 +16,9 @@
 
 <script>
 import Clipboard from 'clipboard'
+import { ElMessage } from "element-plus";
 export default {
+  name: 'SnowVueApp', 
   data() {
     return {
       message: 'Hello Vue!',
@@ -34,11 +36,13 @@ export default {
       clipboard.on('success', (e) => {
         // 释放内存
         console.log(e, '复制成功')
+        ElMessage.success('复制成功')
         
         clipboard.destroy()
       })
       clipboard.on('error', (e) => {
         console.log(e, '复制失败');
+        ElMessage.error('复制失败')
         // 释放内存
         clipboard.destroy()
       })

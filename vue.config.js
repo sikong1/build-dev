@@ -6,6 +6,10 @@
  * @FilePath: \snow-vue\vue.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+const AutoImport = require("unplugin-auto-import/webpack");
+const Components = require("unplugin-vue-components/webpack");
+const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+const IconResolver = require("unplugin-icons/resolver");
 const { defineConfig } = require('@vue/cli-service')
 
 const libraryAPI = "http://202.109.255.147:8010";
@@ -24,7 +28,16 @@ module.exports = defineConfig({
         'components': '@/components',
         'pages': '@/pages',
       }
-    }
+    },
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver(), IconResolver({ componentPrefix: "icon" })] // 遇到前缀为icon自动解析
+      })
+      // Icons({ compiler: 'vue3', scale: 1, defaultClass: 'inline-block', autoInstall: true })
+    ]
   },
 
   devServer: {
@@ -36,12 +49,12 @@ module.exports = defineConfig({
           "^/library": "/library"
         }
       },
-      '/': {
-        // target: 'http://localhost:8888',
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        pathRewrite: {},
-      },
+      // '/': {
+      //   // target: 'http://localhost:8888',
+      //   target: 'http://localhost:3000',
+      //   changeOrigin: true,
+      //   pathRewrite: {},
+      // },
       '/att': {
         target: 'https://console.qzcjrh.cn/att',
         pathRewrite: {

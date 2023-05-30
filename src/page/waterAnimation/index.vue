@@ -7,37 +7,22 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="water">
+  <div class="box">
+    <div class="water"></div>
   </div>
 </template>
 <script>
 export default {
   name: 'WaterItem',
-  data() {
-    return {
-
-    }
-  },
-  mounted() {
-    this.setSnow()
-  },
-  methods: {
-    setSnow() {
-
-    }
-  }
 }
 </script>
 
-<style>
-body {
+<style lang="scss" scoped>
+.box {
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(40, 134, 241, 0.925);
 }
-
-</style>
-
-<style lang="scss" scoped>
-
 .water {
   width: 400px;
   height: 400px;

@@ -24,6 +24,7 @@
     "tesseract.js": "^4.0.2",
     "three": "^0.148.0",
     "vue": "^3.2.13",
+    "vue-router": "^4.0.0",
     "vue3-seamless-scroll": "^2.0.1"
   },
   "devDependencies": {
@@ -39,7 +40,10 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.6.0",
     "node-sass": "^7.0.3",
-    "sass-loader": "^13.1.0"
+    "sass-loader": "^13.1.0",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-icons": "^0.14.9",
+    "unplugin-vue-components": "^0.22.4"
   },
   "eslintConfig": {
     "root": true,
