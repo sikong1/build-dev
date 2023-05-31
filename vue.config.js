@@ -15,6 +15,7 @@ const { defineConfig } = require('@vue/cli-service')
 const libraryAPI = "http://202.109.255.147:8010";
 module.exports = defineConfig({
   transpileDependencies: true,
+  productionSourceMap: false,
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
