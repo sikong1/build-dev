@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div style="margin-bottom: 8px;">婷</div>
+    <div class="m-b-8">婷</div>
+    <div class="m-b-8">github项目地址：<a href="https://github.com/sikong1/build-dev.git" target="_blank">https://github.com/sikong1/build-dev.git</a></div>
     <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
       routerTitle(item) }}</button>
     <keep-alive>
@@ -16,7 +17,6 @@ export default {
 </script>
 
 <script setup>
-
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
 import useStore from "@/pinia";
@@ -36,7 +36,6 @@ onMounted(() => {
   console.log(routers.value, 'routersrouters');
 })
 
-
 const routerTitle = computed(() => {
   return (item) => {
     if (!item.meta) {
@@ -51,4 +50,8 @@ const currentRouter = (item) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.m-b-8 {
+  margin-bottom: 8px;
+}
+</style>
