@@ -20,7 +20,14 @@ export default {
 
 <script setup>
 import pinyin from 'pinyin'
-import { computed } from 'vue';
+import { ElMessage } from "element-plus";
+import { computed, onMounted } from 'vue';
+
+onMounted(() => {
+  if (!pinyin) {
+    ElMessage.error('该设备不支持查看');
+  }
+});
 
 // 匹配从a-z,A-Z,0-9
 const rep = /[a-zA-Z0-9]/;
