@@ -64,7 +64,7 @@ onMounted(() => {
 
 const getData = () => {
   setTimeout(() => {
-    this.list.push(...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    list.value.push(...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
   }, 300)
 }
 const getNextPageData = () => {

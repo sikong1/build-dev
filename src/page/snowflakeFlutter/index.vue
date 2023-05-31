@@ -79,7 +79,6 @@ const setSnow = () => {
       context.moveTo(snow.x, snow.y);
       context.arc(snow.x, snow.y, snow.r, 0, Math.PI * 2);
     }
-    console.log('dd', context);
     context.fill();
     context.closePath();
     move()
