@@ -29,6 +29,19 @@ export default {
 };
 </script>
 
+<script setup>
+import { onMounted } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
+
+onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
+})
+</script>
+
 <style lang="scss" scoped>
 .box {
   width: 100vw;
@@ -57,9 +70,11 @@ export default {
   .red {
     background: linear-gradient(rgb(209, 112, 112), rgb(176, 30, 30));
   }
+
   .green {
     background: linear-gradient(rgb(146, 198, 146), rgb(81, 191, 81));
   }
+
   .blue {
     background: linear-gradient(rgb(92, 92, 177), rgb(34, 34, 169));
   }
@@ -97,15 +112,17 @@ export default {
 }
 
 .g {
+
   .ball-item,
   .ball-shadow {
     animation-delay: 50ms;
   }
 }
+
 .b {
+
   .ball-item,
   .ball-shadow {
     animation-delay: 100ms;
   }
-}
-</style>
+}</style>

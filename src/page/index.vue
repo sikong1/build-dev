@@ -19,11 +19,17 @@ export default {
 
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
 
 const router = useRouter();
 
 const routers = ref([])
 onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
   const routerItems = router.options.routes;
   const appRouter = routerItems.find((item) => item.name === 'index');
   appRouter && (routers.value = appRouter.children);

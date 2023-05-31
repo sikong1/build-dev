@@ -47,6 +47,31 @@ export default {
 }
 </script>
 
+<script setup>
+import { onMounted, ref } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
+
+const list = ref([])
+
+onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
+  getData()
+})
+
+const getData = () => {
+  setTimeout(() => {
+    this.list.push(...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+  }, 300)
+}
+const getNextPageData = () => {
+  getData()
+}
+</script>
+
 <style lang="scss" scoped>
 .box {
   width: 300px;

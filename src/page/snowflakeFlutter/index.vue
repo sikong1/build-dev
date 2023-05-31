@@ -18,9 +18,15 @@ export default {
 </script>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
 
 onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
   setSnow()
 })
 

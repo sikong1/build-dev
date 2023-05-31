@@ -15,53 +15,43 @@
 </template>
 
 <script>
-import Clipboard from 'clipboard'
-import { ElMessage } from "element-plus";
 export default {
-  name: 'SnowVueApp', 
-  data() {
-    return {
-      message: 'Hello Vue!',
-    };
-  },
-
-  mounted() {
-
-  },
-
-  methods: {
-    copy() {
-      let clipboard = new Clipboard('.Collection-btn ')
-      console.log(clipboard)
-      clipboard.on('success', (e) => {
-        // 释放内存
-        console.log(e, '复制成功')
-        ElMessage.success('复制成功')
-        
-        clipboard.destroy()
-      })
-      clipboard.on('error', (e) => {
-        console.log(e, '复制失败');
-        ElMessage.error('复制失败')
-        // 释放内存
-        clipboard.destroy()
-      })
-    }
-    // copy() {
-    //   const input = document.createElement('input')
-    //   input.value = this.message
-    //   document.body.appendChild(input)
-    //   input.select()
-    //   if (document.execCommand('copy')) {
-    //     document.execCommand('copy')
-    //     console.log('复制成功')
-    //   }
-    //   document.body.removeChild(input)
-    // }
-  },
+  name: 'SnowVueApp',
 };
 </script>
 
-<style lang="scss" scoped>
+<script setup>
+import Clipboard from 'clipboard'
+import { ElMessage } from "element-plus";
+import { onMounted } from 'vue';
+import useStore from "@/pinia";
 
-</style>
+const { loading } = useStore()
+
+onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
+})
+
+const message = 'message'
+const copy = () => {
+  let clipboard = new Clipboard('.Collection-btn ')
+  console.log(clipboard)
+  clipboard.on('success', (e) => {
+    // 释放内存
+    console.log(e, '复制成功')
+    ElMessage.success('复制成功')
+
+    clipboard.destroy()
+  })
+  clipboard.on('error', (e) => {
+    console.log(e, '复制失败');
+    ElMessage.error('复制失败')
+    // 释放内存
+    clipboard.destroy()
+  })
+}
+</script>
+
+<style lang="scss" scoped></style>

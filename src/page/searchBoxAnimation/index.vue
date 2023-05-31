@@ -26,6 +26,16 @@ export default {
 
 <script setup>
 import { ref } from 'vue';
+import { onMounted } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
+
+onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
+})
 
 
 const inputText = ref('')

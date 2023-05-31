@@ -17,12 +17,26 @@ export default {
 }
 </script>
 
+<script setup>
+import { onMounted } from 'vue';
+import useStore from "@/pinia";
+
+const { loading } = useStore()
+
+onMounted(() => {
+  if (loading) {
+    loading.loadingAll.close()
+  }
+})
+</script>
+
 <style lang="scss" scoped>
 .box {
   width: 100vw;
   height: 100vh;
   background-color: rgba(40, 134, 241, 0.925);
 }
+
 .water {
   width: 400px;
   height: 400px;
