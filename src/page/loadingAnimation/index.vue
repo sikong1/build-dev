@@ -36,7 +36,7 @@ import useStore from "@/pinia";
 const { loading } = useStore()
 
 onMounted(() => {
-  if (loading) {
+  if (loading.loadingAll.close) {
     loading.loadingAll.close()
   }
 })
@@ -44,8 +44,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .box {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,4 +125,5 @@ onMounted(() => {
   .ball-shadow {
     animation-delay: 100ms;
   }
-}</style>
+}
+</style>

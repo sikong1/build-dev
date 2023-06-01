@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { ElLoading } from 'element-plus'
+// import { ElLoading } from 'element-plus'
+// import LoadingVue from '@/components/loading/index.vue'
 import useStore from "@/pinia";
 
 // 路由配置
@@ -106,15 +107,9 @@ const router = createRouter({
 // 前置守卫 增加loading效果
 router.beforeEach((to, from, next) => {
   const { loading } = useStore();
-  const loadingConfig = ElLoading.service({
-    lock: true,
-    text: '加载中...',
-    background: 'rgba(0, 0, 0, 0.7)',
-  })
-  loading.setLoadingAll(loadingConfig);
-  
-  console.log(to, from, next)
   next()
+  loading.loadingAll.open()
+  console.log(to, from, next)
 })
 
 // 后置守卫

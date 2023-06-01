@@ -27,6 +27,7 @@ const router = useRouter();
 
 const routers = ref([])
 onMounted(() => {
+  console.log(loading.loadingAll, 'loading.loadingAll');
   if (loading) {
     loading.loadingAll.close()
   }
