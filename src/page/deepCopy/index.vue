@@ -21,14 +21,8 @@ export default {
 
 <script setup>
 import { onMounted } from 'vue';
-import useStore from "@/pinia";
-
-const { loading } = useStore()
 
 onMounted(() => {
-  if (loading) {
-    loading.loadingAll.close()
-  }
   const obj1 = {
     a: 1,
     b: 2,

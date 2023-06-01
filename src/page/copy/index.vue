@@ -23,16 +23,6 @@ export default {
 <script setup>
 import Clipboard from 'clipboard'
 import { ElMessage } from "element-plus";
-import { onMounted } from 'vue';
-import useStore from "@/pinia";
-
-const { loading } = useStore()
-
-onMounted(() => {
-  if (loading) {
-    loading.loadingAll.close()
-  }
-})
 
 const message = 'message'
 const copy = () => {

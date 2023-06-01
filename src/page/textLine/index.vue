@@ -19,16 +19,6 @@ export default {
 </script>
 
 <script setup>
-import { onMounted } from 'vue';
-import useStore from "@/pinia";
-
-const { loading } = useStore()
-
-onMounted(() => {
-  if (loading) {
-    loading.loadingAll.close()
-  }
-})
 </script>
 
 <style lang="scss" scoped>

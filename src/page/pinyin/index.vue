@@ -22,14 +22,8 @@ export default {
 import pinyin from 'pinyin'
 import { ElMessage } from "element-plus";
 import { computed, onMounted } from 'vue';
-import useStore from "@/pinia";
-
-const { loading } = useStore()
 
 onMounted(() => {
-  if (loading) {
-    loading.loadingAll.close()
-  }
   if (!pinyin) {
     ElMessage.error('该设备不支持查看');
   }

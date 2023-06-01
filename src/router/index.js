@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { nextTick } from 'vue'
 // import { ElLoading } from 'element-plus'
 // import LoadingVue from '@/components/loading/index.vue'
 import useStore from "@/pinia";
@@ -107,14 +108,18 @@ const router = createRouter({
 // 前置守卫 增加loading效果
 router.beforeEach((to, from, next) => {
   const { loading } = useStore();
-  next()
   loading.loadingAll.open()
   console.log(to, from, next)
+  next()
 })
 
 // 后置守卫
 router.afterEach((to, from) => {
   console.log(to, from)
+  nextTick(() => {
+    const { loading } = useStore();
+    loading.loadingAll.close()
+  })
 })
 
 
