@@ -15,7 +15,12 @@ const { defineConfig } = require('@vue/cli-service')
 const libraryAPI = "http://202.109.255.147:8010";
 module.exports = defineConfig({
   transpileDependencies: true,
-  productionSourceMap: false,
+  // chainWebpack(config) {
+  //   config.optimization.minimizer('terser').tap((args) => {
+  //     args[0].terserOptions.compress.drop_console = true
+  //     return args
+  //   })
+  // },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
