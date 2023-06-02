@@ -55,8 +55,8 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       "/api": {
-        target: 'https://guopw.club',
-        // target: 'http://guopw.club:3008',
+        // target: 'https://guopw.club',
+        target: 'https://cervel-node.vercel.app',
         changeOrigin: true,
         pathRewrite: {
           "^/api": "/"
