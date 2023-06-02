@@ -52,7 +52,7 @@ module.exports = defineConfig({
     ]
   },
 
-  devServer: {
+  devServer: { // 配置代理,解决跨域问题，只在开发环境下生效，vercel部署后不生效,需要在vercel.json中配置,参考:https://vercel.com/docs/configuration#project/proxy
     proxy: {
       "/api": {
         target: 'https://guopw-api.club',
