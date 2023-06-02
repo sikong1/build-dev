@@ -1,32 +1,15 @@
-const Koa = require('koa');
-const Router = require('koa-router');
-const bodyParser = require('koa-bodyparser');
-const app = new Koa();
-const router = new Router();
+const express = require('express');
 
-//
-router.get('/api', async (ctx, next) => {
-  ctx.body = {
-    name: '张三'
-  }
+const app = express();
 
-  // 允许跨域
-  ctx.set('Access-Control-Allow-Origin', '*');
-  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-  
-});
+app.get('/', (req, res) => res.send('Home Page Route'));
 
-// 注册中间件
-app.use(bodyParser());
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.get('/about', (req, res) => res.send('About Page Route'));
 
-// app.use(async ctx => {
-//   ctx.body = 'Hello Vercel';
-// });
+app.get('/portfolio', (req, res) => res.send('Portfolio Page Route'));
 
+app.get('/contact', (req, res) => res.send('Contact Page Route'));
 
-app.listen(3008, () => {
-  console.log('3008项目启动', 'http://localhost:3008')
-});
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
