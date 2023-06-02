@@ -20,7 +20,7 @@ const libraryAPI = "http://202.109.255.147:8010";
 //   return `${protocol}//${host}`;
 // };
 module.exports = defineConfig({
-  transpileDependencies: true,
+  transpileDependencies: true, // 默认为false, 如果你需要使用babel转译第三方包,需要设置为true
   // chainWebpack(config) {
   //   config.optimization.minimizer('terser').tap((args) => {
   //     args[0].terserOptions.compress.drop_console = true
