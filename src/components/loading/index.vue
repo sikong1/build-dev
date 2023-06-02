@@ -47,6 +47,7 @@ const { loading } = useLoading()
     p {
       font-size: 50px;
       margin-top: -15px;
+      color: #fff;
     }
   }
 }
