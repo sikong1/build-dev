@@ -13,6 +13,12 @@ const IconResolver = require("unplugin-icons/resolver");
 const { defineConfig } = require('@vue/cli-service')
 
 const libraryAPI = "http://202.109.255.147:8010";
+// 获取当前的域名
+// const getHost = () => {
+//   const protocol = window.location.protocol;
+//   const host = window.location.host;
+//   return `${protocol}//${host}`;
+// };
 module.exports = defineConfig({
   transpileDependencies: true,
   // chainWebpack(config) {
@@ -48,25 +54,32 @@ module.exports = defineConfig({
 
   devServer: {
     proxy: {
-      "/library": {
-        target: libraryAPI,
+      "/api": {
+        target: 'http://localhost:3008',
         changeOrigin: true,
         pathRewrite: {
-          "^/library": "/library"
+          "^/api": "/api"
         }
       },
+      // "/library": {
+      //   target: libraryAPI,
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     "^/library": "/library"
+      //   }
+      // },
       // '/': {
       //   // target: 'http://localhost:8888',
       //   target: 'http://localhost:3000',
       //   changeOrigin: true,
       //   pathRewrite: {},
       // },
-      '/att': {
-        target: 'https://console.qzcjrh.cn/att',
-        pathRewrite: {
-          '^/att': ''
-        }
-      },
+      // '/att': {
+      //   target: 'https://console.qzcjrh.cn/att',
+      //   pathRewrite: {
+      //     '^/att': ''
+      //   }
+      // },
       // '/webSocket': {
       //   target: 'ws://172.16.6.17:8888',
       //   changeOrigin: true,

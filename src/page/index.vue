@@ -20,6 +20,7 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
+import { getApi } from '@/api/index.js';
 
 const router = useRouter();
 
@@ -29,6 +30,10 @@ onMounted(() => {
   const appRouter = routerItems.find((item) => item.name === 'index');
   appRouter && (routers.value = appRouter.children);
   console.log(routers.value, 'routersrouters');
+
+  getApi().then((res) => {
+    console.log(res, 'res');
+  });
 })
 
 const routerTitle = computed(() => {

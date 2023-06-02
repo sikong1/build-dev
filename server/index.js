@@ -9,6 +9,12 @@ router.get('/api', async (ctx, next) => {
   ctx.body = {
     name: '张三'
   }
+
+  // 允许跨域
+  ctx.set('Access-Control-Allow-Origin', '*');
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  
 });
 
 // 注册中间件
