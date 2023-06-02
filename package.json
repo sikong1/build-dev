@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "node ./server/index.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -18,7 +19,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "esri-loader": "^3.6.0",
-    "express": "^4.18.2",
+    "express": "^4.17.1",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.0",
     "koa-router": "^12.0.0",

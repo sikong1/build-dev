@@ -55,10 +55,11 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       "/api": {
-        target: 'http://guopw.club:3008',
+        target: 'https://guopw.club',
+        // target: 'http://guopw.club:3008',
         changeOrigin: true,
         pathRewrite: {
-          "^/api": "/api"
+          "^/api": "/"
         }
       },
       // "/library": {

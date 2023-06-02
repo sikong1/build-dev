@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost'
+  baseURL: '/'
 })
 
 
 export const getApi = () => {
-  return api.get('/api')
+  return api.get('abuot')
 }
