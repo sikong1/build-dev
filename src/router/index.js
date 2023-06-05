@@ -96,6 +96,14 @@ const routes = [
           title: '中文拼音',
         }
       },
+      {
+        path: '/tesseract',
+        name: 'tesseract',
+        component: () => import('@/page/tesseract'),
+        meta: {
+          title: '图片文字识别功能',
+        }
+      },
     ]
   }
 ]

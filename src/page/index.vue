@@ -20,7 +20,7 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
-import { getApi } from '@/api/index.js';
+import { getApi, login } from '@/api/modules/login.js';
 
 const router = useRouter();
 
@@ -31,6 +31,12 @@ onMounted(() => {
   appRouter && (routers.value = appRouter.children);
   console.log(routers.value, 'routersrouters');
 
+  login({
+    username: 'gpw',
+    password: '123456'
+  }).then((res) => {
+    console.log(res, 'res');
+  });
   getApi().then((res) => {
     console.log(res, 'res');
   });
