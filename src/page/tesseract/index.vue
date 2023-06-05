@@ -3,7 +3,7 @@
     <input type="file" @change="onFileChange" />
     <img :src="url" />
     <button @click="recognizeText">识别</button>
-    <div v-html="text"></div>
+    <pre>{{ text }}</pre>
   </div>
 </template>
 
