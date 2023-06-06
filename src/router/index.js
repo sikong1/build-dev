@@ -101,7 +101,15 @@ const routes = [
         name: 'tesseract',
         component: () => import('@/page/tesseract'),
         meta: {
-          title: '图片文字识别功能',
+          title: '图片文字识别功能(英文)',
+        }
+      },
+      {
+        path: '/editWord',
+        name: 'editWord',
+        component: () => import('@/page/editWord/index.vue'),
+        meta: {
+          title: '动态转换word（docxtemplater实现）',
         }
       },
     ]
