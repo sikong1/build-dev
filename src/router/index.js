@@ -112,6 +112,14 @@ const routes = [
           title: '动态转换word（docxtemplater实现）',
         }
       },
+      {
+        path: '/mapEcharts',
+        name: 'mapEcharts',
+        component: () => import('@/page/mapEcharts/index.vue'),
+        meta: {
+          title: 'echarts地图',
+        }
+      },
     ]
   }
 ]
