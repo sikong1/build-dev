@@ -9,9 +9,16 @@ const api = axios.create({
     'Content-Type': 'application/json;charset=UTF-8'
   }
 })
+// token白名单
+const whiteList = ['/login', '/register']
 // 请求拦截器
 api.interceptors.request.use(
   config => {
+    // 白名单不需要token
+    if (whiteList.includes(config.url)) {
+      return config
+    }
+    // 获取token
     const { token } = isLoginOut()
     // 在请求头中加token
     config.headers.Authorization = token

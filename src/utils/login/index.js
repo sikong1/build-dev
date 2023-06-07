@@ -1,9 +1,28 @@
 import { ElMessage } from "element-plus";
 import { getStore, removeStore, setStore } from "@/utils/storage";
 import router from "@/router";
-import { tokenStore } from "@/page/login";
+import { tokenStore, redirectStore } from "@/page/login";
 
-let timer = 0
+const type = {
+  loginOut: 'loginOut',
+  loginIn: 'loginIn',
+  loginOut401: 'loginOut401',
+  loginOut403: 'loginOut403',
+}
+
+// 重置计时器
+const resetTimer = (type) => {
+  if (type !== timer.type) {
+    timer.num = '0'
+    timer.type = type
+  }
+}
+
+const timer = {
+  num: '0',
+  type: type.loginOut
+}
+const endTime = 500
 export const isLoginOut = () => {
   const isLogin = getStore({
     name: tokenStore
@@ -21,9 +40,9 @@ export const isLoginOut = () => {
 
 export const loginOut401Message = () => {
   const now = new Date().getTime()
-  if (now - timer > 3000) {
-    console.log(now - timer, 'now - timer');
-    timer = now
+  resetTimer(type.loginOut401)
+  if (now - timer.num > endTime) {
+    timer.num = now
     ElMessage({
       message: '无权限，请重新登录',
       type: 'warning',
@@ -33,8 +52,9 @@ export const loginOut401Message = () => {
 }
 export const loginOut403Message = () => {
   const now = new Date().getTime()
-  if (now - timer > 3000) {
-    timer = now
+  resetTimer(type.loginOut403)
+  if (now - timer.num > endTime) {
+    timer.num = now
     ElMessage({
       message: '登录过期，请重新登录',
       type: 'warning',
@@ -52,8 +72,14 @@ export const loginInMessage = () => {
 
 export const loginOut = () => {
   const now = new Date().getTime()
-  if (now - timer > 3000) {
-    timer = now
+  resetTimer(type.loginOut)
+  if (now - timer.num > endTime) {
+    timer.num = now
+    // 保存当前路由
+    setStore({
+      name: redirectStore,
+      content: router.currentRoute.value.fullPath
+    })
     removeStore({
       name: tokenStore
     })
@@ -64,14 +90,22 @@ export const loginOut = () => {
 }
 
 export const loginIn = (token) => {
+  console.log(1);
   const now = new Date().getTime()
-  if (now - timer > 3000) {
-    timer = now
+  resetTimer(type.loginIn)
+  console.log(2, now - timer.num, timer, now);
+  if (now - timer.num > endTime) {
+    console.log(3);
+    timer.num = now
     loginInMessage()
     setStore({
       name: tokenStore,
       content: token,
     })
-    router.push('/index')
+    // 重定向到之前的页面, 不存在则跳转到首页
+    const redirect = getStore({
+      name: redirectStore
+    })
+    router.push(redirect ? redirect : '/')
   }
 }
