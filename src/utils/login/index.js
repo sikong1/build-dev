@@ -3,6 +3,7 @@ import { getStore, removeStore, setStore } from "@/utils/storage";
 import router from "@/router";
 import { tokenStore } from "@/page/login";
 
+let timer = 0
 export const isLoginOut = () => {
   const isLogin = getStore({
     name: tokenStore
@@ -19,18 +20,27 @@ export const isLoginOut = () => {
 }
 
 export const loginOut401Message = () => {
-  ElMessage({
-    message: '无权限，请重新登录',
-    type: 'warning',
-  })
-  router.push('/login')
+  const now = new Date().getTime()
+  if (now - timer > 3000) {
+    console.log(now - timer, 'now - timer');
+    timer = now
+    ElMessage({
+      message: '无权限，请重新登录',
+      type: 'warning',
+    })
+    router.push('/login')
+  }
 }
 export const loginOut403Message = () => {
-  ElMessage({
-    message: '登录过期，请重新登录',
-    type: 'warning',
-  })
-  router.push('/login')
+  const now = new Date().getTime()
+  if (now - timer > 3000) {
+    timer = now
+    ElMessage({
+      message: '登录过期，请重新登录',
+      type: 'warning',
+    })
+    router.push('/login')
+  }
 }
 
 export const loginInMessage = () => {
@@ -41,19 +51,27 @@ export const loginInMessage = () => {
 }
 
 export const loginOut = () => {
-  removeStore({
-    name: tokenStore
-  })
-  router.push({
-    path: '/login'
-  })
+  const now = new Date().getTime()
+  if (now - timer > 3000) {
+    timer = now
+    removeStore({
+      name: tokenStore
+    })
+    router.push({
+      path: '/login'
+    })
+  }
 }
 
 export const loginIn = (token) => {
-  loginInMessage()
-  setStore({
-    name: tokenStore,
-    content: token,
-  })
-  router.push('/index')
+  const now = new Date().getTime()
+  if (now - timer > 3000) {
+    timer = now
+    loginInMessage()
+    setStore({
+      name: tokenStore,
+      content: token,
+    })
+    router.push('/index')
+  }
 }
