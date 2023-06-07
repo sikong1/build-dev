@@ -1,0 +1,79 @@
+<template>
+  <div class="login-box">
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm" :size="formSize"
+      status-icon>
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="ruleForm.username" />
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input v-model="ruleForm.password" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="loginClick">登录</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SnowVueIndex',
+};
+</script>
+
+<script setup>
+import { reactive, ref } from 'vue'
+import { login } from '@/api/modules/login.js';
+import { ElMessage } from 'element-plus';
+import { loginIn } from '@/utils/login';
+
+
+const formSize = 'small';
+const ruleFormRef = ref(null)
+const ruleForm = reactive({
+  username: '',
+  password: '',
+});
+
+const rules = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 11, message: '长度在 3 到 11 个字符', trigger: 'blur' },
+  ],
+}
+
+const loginClick = async () => {
+  // 校验表单
+  const valid = await ruleFormRef.value.validate()
+  if (!valid) {
+    return ElMessage({
+      message: '请填写完整信息',
+      type: 'warning',
+    })
+  }
+  const res = await login(ruleForm)
+
+  if (res.data.status === 200) {
+    loginIn(res.data.token)
+  } else if (res.data.status === 400) {
+    ElMessage({
+      message: res.data.message,
+      type: 'warning',
+    })
+  }
+}
+
+</script>
+
+<style lang="scss" scoped>
+.login-box {
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+</style>

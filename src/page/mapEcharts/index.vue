@@ -13,7 +13,7 @@ export default {
 <script setup>
 import * as echarts from 'echarts'
 // 获取中国地图信息
-import chinaGeoJson from '@/config/china.ts';
+import chinaGeoJson from '@/config/china';
 import { getPoint } from '@/api/modules/point.js'
 import { getOptions } from './options'
 import { onMounted, onUnmounted, ref } from 'vue'

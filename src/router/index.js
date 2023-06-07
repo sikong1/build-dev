@@ -12,6 +12,11 @@ const routes = [
     redirect: '/index',
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/page/login/index.vue'),
+  },
+  {
     path: '/index',
     name: 'index',
     component: () => import('@/page/index'),
@@ -121,6 +126,11 @@ const routes = [
         }
       },
     ]
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/page/404'),
   }
 ]
 

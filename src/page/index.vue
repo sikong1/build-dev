@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="m-b-8">婷</div>
+    <div class="m-b-8 flex">婷
+      <el-button type="primary" size="small" @click="outLogin">退出登录</el-button>
+    </div>
     <div class="m-b-8">github项目地址：<a href="https://github.com/sikong1/build-dev.git"
         target="_blank">https://github.com/sikong1/build-dev.git</a></div>
     <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
@@ -20,27 +22,32 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
-import { getApi, login } from '@/api/modules/login.js';
+import { ElMessage } from 'element-plus'
+import { getApi } from '@/api/modules/login.js';
+import { isLoginOut, loginOut } from '@/utils/login'
 
 const router = useRouter();
 
 const routers = ref([])
 onMounted(() => {
+  isLoginOut();
+  getList();
+  showRouter();
+})
+
+const getList = async () => {
+  const res = await getApi()
+  if (res.status === 200) {
+    console.log(res, 'res');
+  }
+}
+
+const showRouter = () => {
   const routerItems = router.options.routes;
+  console.log(routerItems, 'dddd');
   const appRouter = routerItems.find((item) => item.name === 'index');
   appRouter && (routers.value = appRouter.children);
-  console.log(routers.value, 'routersrouters');
-
-  login({
-    username: 'gpw',
-    password: '123456'
-  }).then((res) => {
-    console.log(res, 'res');
-  });
-  getApi().then((res) => {
-    console.log(res, 'res');
-  });
-})
+}
 
 const routerTitle = computed(() => {
   return (item) => {
@@ -54,10 +61,24 @@ const routerTitle = computed(() => {
 const currentRouter = (item) => {
   router.push(item.path)
 }
+
+const outLogin = () => {
+  ElMessage({
+    message: '退出成功',
+    type: 'success',
+  })
+  // 清除token
+  loginOut()
+}
 </script>
 
 <style lang="scss" scoped>
 .m-b-8 {
   margin-bottom: 8px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
