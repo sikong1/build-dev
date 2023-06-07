@@ -21,12 +21,26 @@ const libraryAPI = "http://202.109.255.147:8010";
 // };
 module.exports = defineConfig({
   transpileDependencies: true, // 默认为false, 如果你需要使用babel转译第三方包,需要设置为true
-  // chainWebpack(config) {
-  //   config.optimization.minimizer('terser').tap((args) => {
-  //     args[0].terserOptions.compress.drop_console = true
-  //     return args
-  //   })
-  // },
+  chainWebpack(config) {
+    // config.optimization.minimizer('terser').tap((args) => {
+    //   args[0].terserOptions.compress.drop_console = true
+    //   return args
+    // })
+
+    //gzip压缩
+    let productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
+    config.plugin('CompressionPlugin').use('compression-webpack-plugin', [
+      {
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
+        // 要压缩的文件（正则）
+        test: productionGzipExtensions,
+        // 最小文件开启压缩
+        threshold: 10240, // 10KB
+        minRatio: 0.8,
+      },
+    ]);
+  },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
