@@ -10,7 +10,7 @@ const api = axios.create({
   }
 })
 // token白名单
-const whiteList = ['/login', '/register']
+const whiteList = ['/login', '/code', '/code/check', '/newToken']
 // 请求拦截器
 api.interceptors.request.use(
   config => {

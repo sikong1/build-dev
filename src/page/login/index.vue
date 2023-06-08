@@ -13,6 +13,8 @@
       </el-form-item>
     </el-form>
   </div>
+  <Verify ref="verifyref" mode="pop" captchaType="blockPuzzle" :imgSize="{ width: '330px', height: '155px' }"
+    @success="handleLogin" />
 </template>
 
 <script>
@@ -26,6 +28,7 @@ import { reactive, ref } from 'vue'
 import { login } from '@/api/modules/login.js';
 import { ElMessage } from 'element-plus';
 import { loginIn } from '@/utils/login';
+import Verify from '@/components/Verifition/Verify.vue'
 
 
 const formSize = 'small';
@@ -46,6 +49,7 @@ const rules = {
   ],
 }
 
+const verifyref = ref(null)
 const loginClick = async () => {
   // 校验表单
   const valid = await ruleFormRef.value.validate()
@@ -55,6 +59,11 @@ const loginClick = async () => {
       type: 'warning',
     })
   }
+  // 校验验证码
+  verifyref.value.show()
+}
+
+const handleLogin = async () => {
   const res = await login(ruleForm)
 
   if (res.data.status === 200) {
