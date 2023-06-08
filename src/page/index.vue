@@ -3,8 +3,10 @@
     <div class="m-b-8 flex">婷
       <el-button type="primary" size="small" @click="outLogin">退出登录</el-button>
     </div>
-    <div class="m-b-8">github项目地址：<a href="https://github.com/sikong1/build-dev.git"
-        target="_blank">https://github.com/sikong1/build-dev.git</a></div>
+    <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git"
+        target="_blank">前端项目地址</a></div>
+    <div class="m-b-8"><a href="https://github.com/sikong1/cervel-node"
+        target="_blank">后端项目地址</a></div>
     <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
       routerTitle(item) }}</button>
     <router-view v-slot="{ Component }">
