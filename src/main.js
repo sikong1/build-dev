@@ -6,6 +6,7 @@ import App from './App.vue'
 import { createPinia } from "pinia";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import loading from '@/components/loading/index.js'
+import 'echarts-wordcloud'
 const app = createApp(App)
 // console.log = function () { }
 // console.error = function () { }

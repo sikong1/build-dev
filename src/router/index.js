@@ -125,6 +125,14 @@ const routes = [
           title: 'echarts地图',
         }
       },
+      {
+        path: '/wordcloud',
+        name: 'wordcloud',
+        component: () => import('@/page/wordcloud/index.vue'),
+        meta: {
+          title: 'echarts词云图',
+        }
+      },
     ]
   },
   {
