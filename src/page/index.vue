@@ -22,7 +22,7 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { getApi } from '@/api/modules/login.js';
 import { isLoginOut, loginOut } from '@/utils/login'
 
@@ -63,12 +63,24 @@ const currentRouter = (item) => {
 }
 
 const outLogin = () => {
-  ElMessage({
-    message: '退出成功',
-    type: 'success',
+  // 退出登录确认框
+  ElMessageBox.confirm('确认退出登录吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    ElMessage({
+      message: '退出成功',
+      type: 'success',
+    })
+    // 清除token
+    loginOut()
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '已取消退出',
+    })
   })
-  // 清除token
-  loginOut()
 }
 </script>
 
