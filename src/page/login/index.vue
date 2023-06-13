@@ -9,7 +9,7 @@
         <el-input v-model="ruleForm.password" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="loginClick">登录</el-button>
+        <el-button style="width: 180px;" type="primary" @click="loginClick">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

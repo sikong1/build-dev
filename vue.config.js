@@ -12,7 +12,7 @@ const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const IconResolver = require("unplugin-icons/resolver");
 const { defineConfig } = require('@vue/cli-service')
 
-const libraryAPI = "http://202.109.255.147:8010";
+// const libraryAPI = "http://202.109.255.147:8010";
 // 获取当前的域名
 // const getHost = () => {
 //   const protocol = window.location.protocol;
