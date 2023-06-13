@@ -17,20 +17,21 @@
         <el-col :span="6">
           <el-form-item label="支出报销种类：" prop="type">
             <el-select v-model="data.type" placeholder="请选择">
-              <el-option v-for="item in types" :key="item.value" :label="item.label" :value="item.value" />
+              <el-option v-for="item in types" :key="item.value" :label="String(item.label)" :value="item.value" />
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="部门经理：" prop="expenditure">
-            <el-input type="text" v-model="data.expenditure" name="" id="" />
+          <el-form-item label="部门经理：" prop="manager">
+            <el-input type="text" v-model="data.manager" name="" id="" />
           </el-form-item>
         </el-col>
       </el-row>
+      <el-form-item label="日期：" prop="date">
+        <el-date-picker class="m-t-10" type="date" v-model="data.date" placeholder="选择日期" />
+      </el-form-item>
     </el-form>
     <div class="m-t-10">... ...</div>
-    日期：<el-date-picker class="m-t-10" type="date" v-model="data.date" placeholder="选择日期" />
-    <br>
     <el-button class="m-t-10" type="primary" @click="generateDocx">下载文档</el-button>
   </div>
 </template>
@@ -42,28 +43,28 @@ export default {
 </script>
 
 <script setup>
-import useEditWord from '@/hooks/useEditWord.js'
+// import useEditWord from '@/hooks/useEditWord.js'
 import { reactive } from 'vue';
-import FileSaver from 'file-saver';
+// import FileSaver from 'file-saver';
 import { digitUppercase } from '@/utils'
 
-const { downloadLink, getDocxLink } = useEditWord()
+// const { downloadLink, getDocxLink } = useEditWord()
 
 const types = [
   {
-    value: '1',
+    value: 1,
     label: '餐饮费',
   },
   {
-    value: '2',
+    value: 2,
     label: '交通费',
   },
   {
-    value: '3',
+    value: 3,
     label: '住宿费',
   },
   {
-    value: '4',
+    value: 4,
     label: '其他',
   }
 ]
@@ -73,6 +74,7 @@ const data = reactive({
   expenditure: '', // 支出事由
   amount: '', // 金额
   amountText: '', // 金额转成中文大写
+  manager: '', // 部门经理
   type: '', // 报销种类
   date: '', // 日期
 })
@@ -87,6 +89,9 @@ const dataRules = {
   type: [
     { required: true, message: '请选择报销种类', trigger: 'blur' },
   ],
+  manager: [
+    { required: true, message: '请输入部门经理', trigger: 'blur' },
+  ],
   date: [
     { required: true, message: '请选择日期', trigger: 'blur' },
   ],
@@ -96,14 +101,19 @@ const generateDocx = async () => {
   // 金额转成中文大写
   const amount = data.amount
   data.amountText = digitUppercase(amount)
-  await getDocxLink('ceshi.docx', data)
-  FileSaver.saveAs(downloadLink.value, 'test1.docx')
+  console.log(data, 'kkk');
+  // await getDocxLink('ceshi.docx', data)
+  // FileSaver.saveAs(downloadLink.value, 'test1.docx')
 }
 </script>
 
 <style lang="scss" scoped>
 .m-t-10 {
   margin-top: 10px;
+}
+
+.m-b-10 {
+  margin-bottom: 20px;
 }
 
 .flex-c {
