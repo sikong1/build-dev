@@ -133,6 +133,14 @@ const routes = [
           title: 'echarts词云图',
         }
       },
+      {
+        path: '/pyramid',
+        name: 'pyramid',
+        component: () => import('@/page/pyramid/index.vue'),
+        meta: {
+          title: 'echarts金字塔图',
+        }
+      },
     ]
   },
   {
