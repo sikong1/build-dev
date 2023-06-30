@@ -43,12 +43,12 @@ export default {
 </script>
 
 <script setup>
-// import useEditWord from '@/hooks/useEditWord.js'
+import useEditWord from '@/hooks/useEditWord.js'
 import { reactive } from 'vue';
-// import FileSaver from 'file-saver';
+import FileSaver from 'file-saver';
 import { digitUppercase } from '@/utils'
 
-// const { downloadLink, getDocxLink } = useEditWord()
+const { downloadLink, getDocxLink } = useEditWord()
 
 const types = [
   {
@@ -102,8 +102,8 @@ const generateDocx = async () => {
   const amount = data.amount
   data.amountText = digitUppercase(amount)
   console.log(data, 'kkk');
-  // await getDocxLink('ceshi.docx', data)
-  // FileSaver.saveAs(downloadLink.value, 'test1.docx')
+  await getDocxLink('ceshi.docx', data)
+  FileSaver.saveAs(downloadLink.value, 'test1.docx')
 }
 </script>
 

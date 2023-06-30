@@ -1,3 +1,11 @@
+<!--
+ * @Author: sikonggpw 1327325804@qq.com
+ * @Date: 2023-06-06 20:33:14
+ * @LastEditors: sikonggpw 1327325804@qq.com
+ * @LastEditTime: 2023-06-30 15:48:20
+ * @FilePath: \snow-vue\src\page\login\index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <div class="login-box">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm" :size="formSize"

@@ -283,6 +283,7 @@ export default {
             if (status.value && isEnd.value === false) {
                 let moveLeftDistance = parseInt((moveBlockLeft.value || '').replace('px', ''));
                 moveLeftDistance = (moveLeftDistance * 310) / parseInt(setSize.imgWidth);
+                console.log(moveLeftDistance, 'jjjj');
                 let data = {
                     captchaType: captchaType.value,
                     pointJson: secretKey.value
