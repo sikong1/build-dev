@@ -138,7 +138,7 @@ const routes = [
         name: 'pyramid',
         component: () => import('@/page/pyramid/index.vue'),
         meta: {
-          title: 'echarts金字塔图',
+          title: 'echarts三角柱状图',
         }
       },
     ]

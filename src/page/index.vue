@@ -1,17 +1,30 @@
+<!--
+ * @Author: sikonggpw 1327325804@qq.com
+ * @Date: 2023-05-30 11:52:55
+ * @LastEditors: sikonggpw 1327325804@qq.com
+ * @LastEditTime: 2023-06-30 16:20:10
+ * @FilePath: \snow-vue\src\page\index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <div>
     <div class="m-b-8 flex">婷
       <el-button type="primary" size="small" @click="outLogin">退出登录</el-button>
     </div>
-    <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git"
-        target="_blank">前端项目地址</a></div>
-    <div class="m-b-8"><a href="https://github.com/sikong1/cervel-node"
-        target="_blank">后端项目地址</a></div>
-    <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
+    <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git" target="_blank">前端项目地址</a></div>
+    <div class="m-b-8"><a href="https://github.com/sikong1/cervel-node" target="_blank">后端项目地址</a></div>
+    <el-tabs type="border-card" @tab-change="currentRouter">
+      <router-view v-slot="{ Component }">
+        <el-tab-pane v-for="item in routers" :key="item.name" :label="routerTitle(item)">
+          <component :is="Component" />
+        </el-tab-pane>
+      </router-view>
+    </el-tabs>
+    <!-- <button v-for="item in routers" :key="item.name" @click="currentRouter(item)" style="margin: 0 8px 8px 0;">{{
       routerTitle(item) }}</button>
     <router-view v-slot="{ Component }">
       <component :is="Component" />
-    </router-view>
+    </router-view> -->
   </div>
 </template>
 
@@ -60,7 +73,8 @@ const routerTitle = computed(() => {
   }
 })
 
-const currentRouter = (item) => {
+const currentRouter = (index) => {
+  const item = routers.value[index]
   router.push(item.path)
 }
 
