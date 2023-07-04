@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-05-30 11:52:55
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-06-30 16:20:10
+ * @LastEditTime: 2023-07-04 17:09:37
  * @FilePath: \snow-vue\src\page\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,9 +13,9 @@
     </div>
     <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git" target="_blank">前端项目地址</a></div>
     <div class="m-b-8"><a href="https://github.com/sikong1/cervel-node" target="_blank">后端项目地址</a></div>
-    <el-tabs type="border-card" @tab-change="currentRouter">
+    <el-tabs type="border-card" @tab-click="currentRouter" v-model="tabValue">
       <router-view v-slot="{ Component }">
-        <el-tab-pane v-for="item in routers" :key="item.name" :label="routerTitle(item)">
+        <el-tab-pane v-for="item in routers" :key="item.name" :name="routerObj(item).path" :label="routerObj(item).meta.title">
           <component :is="Component" />
         </el-tab-pane>
       </router-view>
@@ -44,7 +44,9 @@ import { isLoginOut, loginOut } from '@/utils/login'
 const router = useRouter();
 
 const routers = ref([])
+let tabValue = router.currentRoute.value.path;
 onMounted(() => {
+  console.log(tabValue, 'tabValue');
   isLoginOut();
   getList();
   showRouter();
@@ -64,16 +66,18 @@ const showRouter = () => {
   appRouter && (routers.value = appRouter.children);
 }
 
-const routerTitle = computed(() => {
+const routerObj = computed(() => {
   return (item) => {
     if (!item.meta) {
       return ''
     }
-    return item.meta.title
+    console.log(item,'item.meta.title');
+    return item
   }
 })
 
-const currentRouter = (index) => {
+const currentRouter = (pane ,e) => {
+  const index = pane.index
   const item = routers.value[index]
   router.push(item.path)
 }
