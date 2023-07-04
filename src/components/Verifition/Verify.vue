@@ -120,7 +120,7 @@ export default {
                     componentType.value = 'VerifySlide';
                     break;
                 case 'clickWord':
-                    verifyType.value = '';
+                    verifyType.value = '1';
                     componentType.value = 'VerifyPoints';
                     break;
             }

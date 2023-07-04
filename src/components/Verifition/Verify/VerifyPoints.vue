@@ -183,9 +183,9 @@ export default {
                                     refresh();
                                 }, 1500);
                             }
-                            proxy.$parent.$emit('success');
+                            proxy.$parent.$parent.$emit('success');
                         } else {
-                            proxy.$parent.$emit('error', proxy);
+                            proxy.$parent.$parent.$emit('error', proxy);
                             barAreaColor.value = '#d9534f';
                             barAreaBorderColor.value = '#d9534f';
                             text.value = '验证失败';
@@ -230,7 +230,7 @@ export default {
                 captchaType: captchaType.value,
             };
             reqGet(data).then((response) => {
-                let res = response.data;
+                let res = response.data.data;
                 if (res.repCode === '0000') {
                     pointBackImgBase.value = res.repData.originalImageBase64;
                     // backToken.value = res.repData.token;

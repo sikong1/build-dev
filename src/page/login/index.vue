@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-06-30 15:48:20
+ * @LastEditTime: 2023-07-04 15:13:22
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,11 +17,18 @@
         <el-input v-model="ruleForm.password" />
       </el-form-item>
       <el-form-item>
+        <div style="margin-top: 20px">
+          <el-radio-group v-model="verifyName" size="small">
+            <el-radio-button v-for="(item, index) in arr" :key="index" :label="item.name">{{ item.value }}</el-radio-button>
+          </el-radio-group>
+        </div>
+      </el-form-item>
+      <el-form-item>
         <el-button style="width: 180px;" type="primary" @click="loginClick">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
-  <Verify ref="verifyref" mode="pop" captchaType="blockPuzzle" :imgSize="{ width: '330px', height: '155px' }"
+  <Verify ref="verifyref" mode="pop" :captchaType="verifyName" :imgSize="{ width: '330px', height: '155px' }"
     @success="handleLogin" />
 </template>
 
@@ -37,14 +44,18 @@ import { login } from '@/server/modules/login.js';
 import { ElMessage } from 'element-plus';
 import { loginIn } from '@/utils/login';
 import Verify from '@/components/Verifition/Verify.vue'
+// import { isMobile } from '@/utils'
+import { LoginEnum } from '@/enum/index.ts'
 
 
 const formSize = 'small';
 const ruleFormRef = ref(null)
 const ruleForm = reactive({
-  username: '',
-  password: '',
+  username: 'gpw',
+  password: '123456',
 });
+const verifyName = ref(LoginEnum.blockPuzzle.name)
+const arr = Object.values(LoginEnum)
 
 const rules = {
   username: [
