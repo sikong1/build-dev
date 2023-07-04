@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-04 15:13:22
+ * @LastEditTime: 2023-07-04 15:59:31
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -51,8 +51,8 @@ import { LoginEnum } from '@/enum/index.ts'
 const formSize = 'small';
 const ruleFormRef = ref(null)
 const ruleForm = reactive({
-  username: 'gpw',
-  password: '123456',
+  username: '',
+  password: '',
 });
 const verifyName = ref(LoginEnum.blockPuzzle.name)
 const arr = Object.values(LoginEnum)
