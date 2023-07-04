@@ -33,7 +33,7 @@ export default {
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { login } from '@/api/modules/login.js';
+import { login } from '@/server/modules/login.js';
 import { ElMessage } from 'element-plus';
 import { loginIn } from '@/utils/login';
 import Verify from '@/components/Verifition/Verify.vue'

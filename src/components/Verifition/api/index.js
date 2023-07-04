@@ -1,5 +1,5 @@
 
-import request from '@/api/index'
+import request from '@/server/index'
 
 // 获取验证图片
 export function reqGet() {

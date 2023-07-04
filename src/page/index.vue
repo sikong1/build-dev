@@ -38,7 +38,7 @@ export default {
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getApi } from '@/api/modules/login.js';
+import { getApi } from '@/server/modules/login.js';
 import { isLoginOut, loginOut } from '@/utils/login'
 
 const router = useRouter();

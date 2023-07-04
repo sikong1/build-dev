@@ -1,134 +1,64 @@
-/*
- * @Author: sikonggpw 1327325804@qq.com
- * @Date: 2023-02-22 09:06:22
- * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-02-22 14:27:27
- * @FilePath: \snow-vue\src\server\index.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-import axios from "axios";
-import { ElMessage as Message, ElMessageBox as MessageBox } from "element-plus";
-// import qs from "qs";
-var showLoginMessageBox = false;
-axios.defaults.headers.post["Content-Type"] =
-  "application/json;charset=UTF-8";
-// 创建axios实例
-const baseURL = 'http://localhost:3000'
-// const baseURL = process.env.NODE_ENV === 'development' ? '' : process.env.VUE_APP_URL;
+import axios from 'axios'
+import router from '@/router'
+import { isLoginOut, loginOut401Message, loginOut403Message } from '@/utils/login'
 
-// const baseURL = "https://console.qzcjrh.cn/"
-// console.log(baseURL)
-const service = axios.create({
-  baseURL: baseURL, // api 的 base_url
-  timeout: 15000 // 请求超时时间
-});
-// service.defaults.withCredentials = true
-
-
-// request拦截器
-// service.interceptors.request.use(
-//   config => {
-//     if (
-//       !config.headers["Content-Type"] ||
-//       config.headers["Content-Type"].indexOf("multipart/form-data") == -1
-//     ) {
-//       config.data = qs.stringify(config.data);
-//     }
-//     return config;
-//   },
-//   error => {
-//     // Do something with request error
-//     return Promise.reject(error);
-//   }
-// );
-
-// response 拦截器
-service.interceptors.response.use(
-  response => {
-    /**
-     * code为非200是抛错
-     */
-    const res = response.data;
-    console.log(response.status, 'response.status');
-    if (response.status === 200 && response.config.responseType === "blob") {
-      // 文件类型特殊处理
-      return response;
-    } else if (res.success !== true) {
-      if(res.code === 400){
-        Message({
-          message: res.error,
-          type: "error"
-        });
-      }
-      // 101	登录已失效 102	没有权限 103	账号已被删除或禁用
-      if (res.code === 101) {
-        if (!showLoginMessageBox) {
-          showLoginMessageBox = true;
-          MessageBox.confirm("你已被登出，请重新登录", "确定登出", {
-            showCancelButton: false,
-            showClose: false,
-            confirmButtonText: "重新登录",
-            type: "warning",
-            callback: action => {
-              showLoginMessageBox = false;
-              if (action === "confirm") {
-                // removeAuth()
-                //   .then(() => {
-                //     location.reload(); // 为了重新实例化vue-router对象 避免bug
-                //   })
-                //   .catch(() => {
-                //     location.reload();
-                //   });
-              }
-            }
-          });
-        }
-      } else if (res.code === 402) {
-        if (
-          res.error &&
-          Object.prototype.toString.call(res.error) === "[object Array]"
-        ) {
-          res.error = res.error.reduce(function(prev, cur) {
-            return prev + "\r\n" + cur;
-          });
-        }
-        Message({
-          showClose: true,
-          duration: 0,
-          customClass: "el-close-message",
-          message: res.error,
-          type: "error"
-        });
-      } else {
-        if (res) {
-          if (!res.success) {
-            Message({
-              showClose: true,
-              message: res.msg,
-              type: "error"
-            });
-          }
-          // let text = res.replace(/(<([^>]+)>)/ig, "").replace(/[\r\n]/g, "")
-          // Message({
-          //   showClose: true,
-          //   message: text,
-          //   type: "error"
-          // });
-        }
-      }
-      return Promise.reject(res);
-    } else {
-      return res;
+const api = axios.create({
+  baseURL: '/api',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8'
+  }
+})
+// token白名单
+const whiteList = ['/login', '/code', '/code/check', '/newToken']
+// 请求拦截器
+api.interceptors.request.use(
+  config => {
+    // 白名单不需要token
+    if (whiteList.includes(config.url)) {
+      return config
     }
+    // 获取token
+    const { token } = isLoginOut()
+    // 在请求头中加token
+    config.headers.Authorization = token
+    return config
+  })
+
+
+// 响应拦截器
+api.interceptors.response.use(
+  response => {
+    return response
   },
   error => {
-    Message({
-      message: "网络请求失败，请稍候再试",
-      type: "error"
-    });
-    return Promise.reject(error);
-  }
-);
+    if (error.response) {
+      switch (error.response.status) {
+        // 401: 未登录
+        // 未登录则跳转登录页面，并携带当前页面的路径
+        // 在登录成功后返回当前页面，这一步需要在登录页操作。
+        case 401:
+          loginOut401Message()
+          break
+        // 403 token过期
+        // 登录过期对用户进行提示
+        // 清除本地token和清空vuex中token对象
+        // 跳转登录页面
+        case 403:
+          loginOut403Message()
+          router.push({
+            path: '/login'
+          })
+          break
+        // 404请求不存在
+        case 404:
+          router.push({
+            path: '/404'
+          })
+          break
+      }
+    }
+    return Promise.reject(error.response)
+  })
 
-export default service;
-
+export default api
