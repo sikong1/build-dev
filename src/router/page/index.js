@@ -119,4 +119,12 @@ export default [
       title: "echarts三角柱状图",
     },
   },
+  {
+    path: "/url-to-base64",
+    name: "url-to-base64",
+    component: () => import("@/page/urlToBase64/index.vue"),
+    meta: {
+      title: "图片url转base64",
+    },
+  },
 ];
