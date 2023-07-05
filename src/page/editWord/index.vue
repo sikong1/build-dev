@@ -44,9 +44,10 @@ export default {
 
 <script setup>
 import useEditWord from '@/hooks/useEditWord.js'
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import FileSaver from 'file-saver';
 import { digitUppercase } from '@/utils'
+import dayjs from 'dayjs'
 
 const { downloadLink, getDocxLink } = useEditWord()
 
@@ -97,12 +98,18 @@ const dataRules = {
   ],
 }
 
+const ruleFormRef = ref(null)
 const generateDocx = async () => {
+  // 验证表单
+  const valid = await ruleFormRef.value.validate()
+  if (!valid) return
   // 金额转成中文大写
   const amount = data.amount
   data.amountText = digitUppercase(amount)
-  console.log(data, 'kkk');
-  await getDocxLink('ceshi.docx', data)
+  // 日期转换
+  const newData = JSON.parse(JSON.stringify(data))
+  newData.date = dayjs(newData.date).format('YYYY年MM月DD日')
+  await getDocxLink('ceshi.docx', newData)
   FileSaver.saveAs(downloadLink.value, 'test1.docx')
 }
 </script>

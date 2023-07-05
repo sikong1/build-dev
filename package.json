@@ -16,6 +16,7 @@
     "cropperjs": "^1.5.13",
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.9",
     "docxtemplater": "^3.37.9",
     "echarts": "^5.4.2",
     "echarts-gl": "^2.0.9",
