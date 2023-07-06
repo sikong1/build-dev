@@ -127,4 +127,12 @@ export default [
       title: "图片url转base64",
     },
   },
+  {
+    path: "/triangleList",
+    name: "triangleList",
+    component: () => import("@/page/webgpu/triangleList.vue"),
+    meta: {
+      title: "webgpu三角形",
+    },
+  },
 ];
