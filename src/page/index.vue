@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-05-30 11:52:55
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-04 17:09:37
+ * @LastEditTime: 2023-07-06 09:48:30
  * @FilePath: \snow-vue\src\page\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -16,7 +16,7 @@
     <el-tabs type="border-card" @tab-click="currentRouter" v-model="tabValue">
       <router-view v-slot="{ Component }">
         <el-tab-pane v-for="item in routers" :key="item.name" :name="routerObj(item).path" :label="routerObj(item).meta.title">
-          <component :is="Component" />
+          <component v-if="routerObj(item).path === router.currentRoute.value.path" :is="Component" />
         </el-tab-pane>
       </router-view>
     </el-tabs>
@@ -71,7 +71,6 @@ const routerObj = computed(() => {
     if (!item.meta) {
       return ''
     }
-    console.log(item,'item.meta.title');
     return item
   }
 })
