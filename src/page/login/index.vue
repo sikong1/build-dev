@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 16:11:36
+ * @LastEditTime: 2023-07-07 20:37:49
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,14 +10,14 @@
   <div class="login-box">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm" :size="formSize"
       status-icon>
-      <el-form-item label="手机号" prop="phone">
-        <el-input v-model="ruleForm.phone" type="phone" />
-      </el-form-item>
       <el-form-item label="用户名" prop="username">
         <el-input v-model="ruleForm.username" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="ruleForm.password" type="password" />
+      </el-form-item>
+      <el-form-item label="手机号" prop="phone">
+        <el-input v-model="ruleForm.phone" type="phone" />
       </el-form-item>
       <el-form-item>
         <div style="margin-top: 20px">

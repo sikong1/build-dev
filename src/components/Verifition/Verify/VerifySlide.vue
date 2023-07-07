@@ -166,6 +166,7 @@ export default {
         let transitionLeft = ref('');
         let transitionWidth = ref('');
         let startLeft = ref(0);
+        let id = '';
 
         const barArea = computed(() => {
             return proxy.$el.querySelector('.verify-bar-area');
@@ -295,6 +296,7 @@ export default {
                               secretKey.value,
                           )
                         : JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
+                        id: id
                     // token: backToken.value,
                 };
                 reqCheck(data).then((response) => {
@@ -309,7 +311,7 @@ export default {
                         if (mode.value === 'pop') {
                             setTimeout(() => {
                                 proxy.$parent.clickShow = false;
-                                refresh();
+                                // refresh();
                             }, 1500);
                         }
                         passFlag.value = true;
@@ -386,6 +388,7 @@ export default {
                     blockBackImgBase.value = res.repData.jigsawImageBase64;
                     // backToken.value = res.repData.token;
                     secretKey.value = res.repData.secretKey;
+                    id = res.repData._id;
                 } else {
                     tipWords.value = res.repMsg;
                 }

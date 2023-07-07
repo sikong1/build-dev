@@ -190,7 +190,7 @@ export default {
                             barAreaBorderColor.value = '#d9534f';
                             text.value = '验证失败';
                             setTimeout(() => {
-                                refresh();
+                                // refresh();
                             }, 700);
                         }
                     });
