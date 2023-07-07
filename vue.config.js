@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2022-10-27 23:39:51
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-03-08 14:53:56
+ * @LastEditTime: 2023-07-07 19:57:47
  * @FilePath: \snow-vue\vue.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,7 +18,8 @@ const { defineConfig } = require('@vue/cli-service')
 //   const protocol = window.location.protocol;
 //   const host = window.location.host;
 //   return `${protocol}//${host}`;
-// };
+// };process.env.VUE_APP_API_URL
+const baseUrl = process.env.VUE_APP_API_URL;
 module.exports = defineConfig({
   transpileDependencies: true, // 默认为false, 如果你需要使用babel转译第三方包,需要设置为true
   chainWebpack(config) {
@@ -70,7 +71,8 @@ module.exports = defineConfig({
     proxy: {
       "/api": {
         // target: 'http://localhost:3000',
-        target: 'https://guopw-api.club',
+        target: baseUrl,
+        // target: 'https://guopw-api.club',
         changeOrigin: true,
         pathRewrite: {
           "^/api": "/"
