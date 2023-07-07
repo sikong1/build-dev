@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-02 09:17:08
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-04 10:27:55
+ * @LastEditTime: 2023-07-07 14:02:47
  * @FilePath: \snow-vue\src\router\index.js
  * @Description: 路由配置
  */
@@ -24,6 +24,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/page/login/index.vue'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/page/register/index.vue'),
   },
   {
     path: '/index',
