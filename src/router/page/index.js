@@ -128,11 +128,19 @@ export default [
     },
   },
   {
-    path: "/triangleList",
-    name: "triangleList",
-    component: () => import("@/page/webgpu/triangleList.vue"),
+    path: "/webgpu",
+    name: "webgpu",
+    component: () => import("@/page/webgpu/index.vue"),
     meta: {
-      title: "webgpu三角形",
+      title: "webgpu",
     },
   },
+  // {
+  //   path: "/gis",
+  //   name: "gis",
+  //   component: () => import("@/gis.vue"),
+  //   meta: {
+  //     title: "arcgis",
+  //   },
+  // },
 ];
