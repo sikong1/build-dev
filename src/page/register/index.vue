@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 14:48:33
+ * @LastEditTime: 2023-07-07 14:57:49
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -60,10 +60,10 @@ const router = useRouter()
 const formSize = 'small';
 const ruleFormRef = ref(null)
 const ruleForm = reactive({
-    username: 'gpw',
-    password: '123456',
-    phone: '12345678901',
-    newpassword: '123456'
+    username: '',
+    password: '',
+    phone: '',
+    newpassword: ''
 });
 const verifyName = ref(LoginEnum.blockPuzzle.name)
 const arr = Object.values(LoginEnum)
@@ -94,7 +94,11 @@ const rules = {
     ],
     phone: [
         { required: true, message: '请输入手机号', trigger: 'blur' },
-        { min: 11, max: 11, message: '长度在 11 个字符', trigger: 'blur' },
+        {
+            pattern: /^1[3456789]\d{9}$/,
+            message: '手机号格式错误',
+            trigger: 'blur',
+        },
     ],
 }
 

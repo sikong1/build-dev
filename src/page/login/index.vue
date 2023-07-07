@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 14:43:34
+ * @LastEditTime: 2023-07-07 14:55:14
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,6 +10,9 @@
   <div class="login-box">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm" :size="formSize"
       status-icon>
+      <el-form-item label="手机号" prop="phone">
+        <el-input v-model="ruleForm.phone" type="phone" />
+      </el-form-item>
       <el-form-item label="用户名" prop="username">
         <el-input v-model="ruleForm.username" />
       </el-form-item>
@@ -57,11 +60,20 @@ const ruleFormRef = ref(null)
 const ruleForm = reactive({
   username: '',
   password: '',
+  phone: '',
 });
 const verifyName = ref(LoginEnum.blockPuzzle.name)
 const arr = Object.values(LoginEnum)
 
 const rules = {
+  phone: [
+    { required: true, message: '请输入手机号', trigger: 'blur' },
+    {
+      pattern: /^1[3456789]\d{9}$/,
+      message: '手机号格式错误',
+      trigger: 'blur',
+    },
+  ],
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
     { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
