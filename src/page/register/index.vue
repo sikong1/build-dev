@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 14:57:49
+ * @LastEditTime: 2023-07-07 15:39:47
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -14,10 +14,10 @@
                 <el-input v-model="ruleForm.username" />
             </el-form-item>
             <el-form-item label="密码" prop="password">
-                <el-input v-model="ruleForm.password" />
+                <el-input v-model="ruleForm.password" type="password" />
             </el-form-item>
             <el-form-item label="确认密码" prop="newpassword">
-                <el-input v-model="ruleForm.newpassword" />
+                <el-input v-model="ruleForm.newpassword" type="password" />
             </el-form-item>
             <el-form-item label="手机号" prop="phone">
                 <el-input v-model="ruleForm.phone" />
@@ -54,6 +54,8 @@ import { LoginEnum } from '@/enum/index.ts'
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router'
 import { register } from '@/server/modules/login.js';
+import { aesEncrypt } from '@/components/Verifition/utils/ase';
+import { generateRandomString } from '@/utils/index';
 
 const router = useRouter()
 
@@ -118,6 +120,11 @@ const registerClick = async () => {
 }
 
 const handleLogin = async () => {
+    //加密
+    const key = generateRandomString(16)
+    ruleForm.password = await aesEncrypt(ruleForm.password, key)
+    ruleForm.newpassword = ''
+    ruleForm.key = key
     const res = await register(ruleForm);
     if (!res.data) {
         return

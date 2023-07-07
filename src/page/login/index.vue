@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 14:55:14
+ * @LastEditTime: 2023-07-07 15:34:21
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -52,6 +52,8 @@ import Verify from '@/components/Verifition/Verify.vue'
 // import { isMobile } from '@/utils'
 import { LoginEnum } from '@/enum/index.ts'
 import { useRouter } from 'vue-router'
+import { aesEncrypt } from '@/components/Verifition/utils/ase';
+import { generateRandomString } from '@/utils/index';
 
 const router = useRouter()
 
@@ -99,15 +101,20 @@ const loginClick = async () => {
 }
 
 const handleLogin = async () => {
+  //加密
+  const key = generateRandomString(16)
+  ruleForm.password = await aesEncrypt(ruleForm.password, key)
+  ruleForm.key = key
   const res = await login(ruleForm)
 
   if (res.data.status === 200) {
     loginIn(res.data.token)
   } else if (res.data.status === 400) {
     ElMessage({
-      message: res.data.message,
+      message: res.data.msg,
       type: 'warning',
     })
+    verifyref.value.closeBox()
   }
 }
 
