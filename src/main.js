@@ -3,7 +3,7 @@ import ElementPlus from 'element-plus'
 import Router from '@/router'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
-import { createPinia } from "pinia";
+import pinia from "./pinia/pinia";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import loading from '@/components/loading/index.js'
 import 'echarts-wordcloud'
@@ -18,7 +18,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.use(ElementPlus)
 app.use(Router)
-app.use(createPinia())
+app.use(pinia)
 app.use(loading)
 
 app.mount('#app')

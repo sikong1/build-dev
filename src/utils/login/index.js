@@ -2,6 +2,8 @@ import { ElMessage } from "element-plus";
 import { getStore, removeStore, setStore } from "@/utils/storage";
 import router from "@/router";
 import { tokenStore, redirectStore } from "@/page/login";
+import useStore from "@/pinia";
+
 
 const type = {
   loginOut: 'loginOut',
@@ -47,6 +49,7 @@ export const loginOut401Message = () => {
       message: '无权限，请重新登录',
       type: 'warning',
     })
+    clearLoginInfo()
     router.push('/login')
   }
 }
@@ -59,6 +62,7 @@ export const loginOut403Message = () => {
       message: '登录过期，请重新登录',
       type: 'warning',
     })
+    clearLoginInfo()
     router.push('/login')
   }
 }
@@ -83,6 +87,7 @@ export const loginOut = () => {
     removeStore({
       name: tokenStore
     })
+    clearLoginInfo()
     router.push({
       path: '/login'
     })
@@ -108,4 +113,10 @@ export const loginIn = (token) => {
     })
     router.push(redirect ? redirect : '/')
   }
+}
+
+// 清除登录信息
+export const clearLoginInfo = () => {
+  const user = useStore().user
+  user.setUserInfo({})
 }
