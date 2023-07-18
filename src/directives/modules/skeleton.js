@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-07-04 16:27:53
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-18 10:33:08
+ * @LastEditTime: 2023-07-18 10:44:10
  * @FilePath: /vue3.0-ts/src/directives/modules/skeleton.ts
  * @Description: 骨架屏指令
  */
@@ -53,6 +53,12 @@ watchEffect(() => {
   render(container, document.body);
 });
 
+const getType = (vnode) => {
+  const classList = vnode.el.className.split(' '); // 获取当前el的class
+  const type = classList.find(item => item.includes(id)); // 获取当前el的type
+  return type
+}
+
 /**
  *
  * @param loading 加载状态
@@ -82,7 +88,8 @@ const Skeleton = {
   mounted(el, binding, vnode) {
     index += 1;
     const type = `${id}${index}`; // 用于区分不同的el
-    vnode.$$index = type; // 在 updated 中需要，更新loading状态
+    // 给el增加属性，用于删除dom
+    vnode.el.classList.add(type);
     const listArr = []; // 用于存放不包含el的list
     const newList = []; // 用于存放包含el的list
     list.forEach((item) => {
@@ -104,12 +111,14 @@ const Skeleton = {
   },
   updated(el, binding, vnode) {
     console.log(el, vnode, '正式环境');
-    stateObj.value[vnode.el.__vnode.$$index].loading = binding.value; // 更新loading状态
-    removeDom(binding.value, vnode.el.__vnode.$$index); // 删除dom
+    const type = getType(vnode); // 获取当前el的type
+    console.log(type, 'llll');
+    stateObj.value[type].loading = binding.value; // 更新loading状态
+    removeDom(binding.value, type); // 删除dom
   },
   unmounted(el, binding, vnode) {
     console.log(el, binding);
-    stateObj.value[vnode.el.__vnode.$$index].loading = false; // 更新loading状态
+    stateObj.value[getType(vnode)].loading = false; // 更新loading状态
   },
 };
 
