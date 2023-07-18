@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-07-04 16:27:53
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-18 10:26:07
+ * @LastEditTime: 2023-07-18 10:33:08
  * @FilePath: /vue3.0-ts/src/directives/modules/skeleton.ts
  * @Description: 骨架屏指令
  */
@@ -103,7 +103,7 @@ const Skeleton = {
     list = listArr; // 将不包含el的list赋值给list，用于下次 v-skeleton 指令的判断
   },
   updated(el, binding, vnode) {
-    console.log(el);
+    console.log(el, vnode, '正式环境');
     stateObj.value[vnode.el.__vnode.$$index].loading = binding.value; // 更新loading状态
     removeDom(binding.value, vnode.el.__vnode.$$index); // 删除dom
   },
