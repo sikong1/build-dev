@@ -135,6 +135,14 @@ export default [
       title: "webgpu",
     },
   },
+  {
+    path: "/skeleton",
+    name: "skeleton",
+    component: () => import("@/page/skeleton/index.vue"),
+    meta: {
+      title: "自定义指令-骨架屏",
+    },
+  },
   // {
   //   path: "/gis",
   //   name: "gis",

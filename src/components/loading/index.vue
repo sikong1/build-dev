@@ -1,3 +1,11 @@
+<!--
+ * @Author: sikonggpw 1327325804@qq.com
+ * @Date: 2023-06-02 09:16:51
+ * @LastEditors: sikonggpw 1327325804@qq.com
+ * @LastEditTime: 2023-07-10 09:26:09
+ * @FilePath: \snow-vue\src\components\loading\index.vue
+ * @Description: 全局加载中组件
+-->
 <template>
   <div class="loading-all" id="loading-all">
     <div class="center">
@@ -17,7 +25,14 @@ export default {
 import LoadingVue from '@/page/loadingAnimation/index.vue'
 import useLoading from '@/hooks/loading-end.js'
 
-const { loading } = useLoading()
+const { loading, end } = useLoading()
+
+const finish = () => {
+  end()
+}
+
+// 导出finish函数，外部调用
+defineExpose({ finish })
 </script>
 
 <style lang="scss" scoped>
