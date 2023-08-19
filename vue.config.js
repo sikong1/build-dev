@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2022-10-27 23:39:51
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-08-19 16:18:30
+ * @LastEditTime: 2023-08-19 17:55:27
  * @FilePath: \snow-vue\vue.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,6 +11,10 @@ const Components = require("unplugin-vue-components/webpack");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const IconResolver = require("unplugin-icons/resolver");
 const { defineConfig } = require('@vue/cli-service')
+// const Dotenv = require('dotenv-webpack');
+const isProd = process.env.NODE_ENV === 'production'
+const path = isProd ? './.env.prod' : './.env.dev'
+require('dotenv').config({path})
 
 // const libraryAPI = "http://202.109.255.147:8010";
 // 获取当前的域名
@@ -62,7 +66,8 @@ module.exports = defineConfig({
       }),
       Components({
         resolvers: [ElementPlusResolver(), IconResolver({ componentPrefix: "icon" })] // 遇到前缀为icon自动解析
-      })
+      }),
+      // new Dotenv()
       // Icons({ compiler: 'vue3', scale: 1, defaultClass: 'inline-block', autoInstall: true })
     ]
   },

@@ -79,7 +79,8 @@ const websocketclose = (e) => {
 const initWebSocket = () => {
     //初始化weosocket
     // 以    ws://服务器地址/webSocket  路由的形式建立连接
-    const wsuri = "ws://127.0.0.1:3000/test";
+    const wsuri = process.env.VUE_APP_WS_URL + '/test';
+    console.log('wsuri',typeof wsuri);
     websock = new WebSocket(wsuri);
     websock.onmessage = websocketonmessage;
     websock.onopen = websocketonopen;
