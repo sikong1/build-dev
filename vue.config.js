@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2022-10-27 23:39:51
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-15 23:39:30
+ * @LastEditTime: 2023-08-19 16:18:30
  * @FilePath: \snow-vue\vue.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -76,16 +76,6 @@ module.exports = defineConfig({
         changeOrigin: true,
         pathRewrite: {
           "^/api": "/"
-        }
-      },
-      '/itf': {
-        target: 'https://console.qzcjrh.cn/itf',
-        // target: 'http://oa.sinkr.cn/cjrh/itf',
-        // target: 'http://124.71.61.184:8080/itf',
-        // target: `${baseUrl}/itf`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/itf': ''
         }
       },
       // "/library": {

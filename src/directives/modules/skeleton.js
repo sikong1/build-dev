@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-07-04 16:27:53
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-18 10:44:10
+ * @LastEditTime: 2023-07-18 15:12:31
  * @FilePath: /vue3.0-ts/src/directives/modules/skeleton.ts
  * @Description: 骨架屏指令
  */
@@ -40,10 +40,10 @@ watchEffect(() => {
   });
 
   const children = elArr.map((item) =>
-    h('div', item.obj.loading ? {
+    h('div', {
       style: getStyle(item.el), // 给dom添加样式,骨架屏的样式
       [id]: item.type, // 给dom添加属性
-    } : null)
+    })
   );
 
   // 创建 div 容器
@@ -82,7 +82,7 @@ let list = [];
  * @description: 骨架屏指令，用于显示隐藏骨架屏，只需要在需要骨架屏的元素上添加 v-skeleton 指令即可，例如：v-skeleton="loading"
  * @param {HTMLElement} el 当前元素
  * @param {boolean} binding.value 骨架屏的显示隐藏，true为显示，false为隐藏
- * @param {vnodeType} vnode 当前元素的虚拟dom
+ * @param {VNode} vnode 虚拟dom
  */
 const Skeleton = {
   mounted(el, binding, vnode) {
@@ -125,7 +125,7 @@ const Skeleton = {
 /**
  * @description: 骨架屏指令，哪个元素需要骨架屏，就在哪个元素上添加该指令
  * @param {HTMLElement} el 当前元素
- * @param {vnodeType} vnode 当前元素的虚拟dom
+ * @param {VNode} vnode 当前元素的虚拟dom
  */
 const SkeletonItem = {
   mounted(el) {
@@ -134,8 +134,9 @@ const SkeletonItem = {
   },
   unmounted(el, binding, vnode) {
     console.log(el, binding);
+    const type = getType(vnode); // 获取当前el的type
     // 删除 el
-    stateObj.value[vnode.el.__vnode.$$index].list = [];
+    stateObj.value[type].list = [];
   },
 };
 

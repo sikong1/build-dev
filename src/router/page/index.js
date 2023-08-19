@@ -95,14 +95,14 @@ export default [
       title: "动态转换word（docxtemplater实现）",
     },
   },
-  {
-    path: "/mapEcharts",
-    name: "mapEcharts",
-    component: () => import("@/page/mapEcharts/index.vue"),
-    meta: {
-      title: "echarts地图",
-    },
-  },
+  // {
+  //   path: "/mapEcharts",
+  //   name: "mapEcharts",
+  //   component: () => import("@/page/mapEcharts/index.vue"),
+  //   meta: {
+  //     title: "echarts地图",
+  //   },
+  // },
   {
     path: "/wordcloud",
     name: "wordcloud",
@@ -143,12 +143,28 @@ export default [
       title: "自定义指令-骨架屏",
     },
   },
+  {
+    path: "/chat",
+    name: "chat",
+    component: () => import("@/page/chat/index.vue"),
+    meta: {
+      title: "聊天对话框",
+    },
+  }
   // {
   //   path: "/gis",
   //   name: "gis",
   //   component: () => import("@/gis.vue"),
   //   meta: {
   //     title: "arcgis",
+  //   },
+  // },
+  // {
+  //   path: "/carousel",
+  //   name: "carousel",
+  //   component: () => import("@/page/carousel/index.vue"),
+  //   meta: {
+  //     title: "轮播图",
   //   },
   // },
 ];

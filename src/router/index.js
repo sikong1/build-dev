@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-02 09:17:08
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 14:02:47
+ * @LastEditTime: 2023-07-26 16:01:05
  * @FilePath: \snow-vue\src\router\index.js
  * @Description: 路由配置
  */
@@ -38,12 +38,13 @@ const routes = [
     children: PageRouter,
   },
   {
-    path: '/404',
+    // 404页面，必须放在最后
+    path: '/:pathMatch(.*)*',
     name: '404',
     component: () => import('@/page/404'),
   },
 ]
-
+console.log(process.env.BASE_URL, 'process.env.BASE_URLprocess.env.BASE_URL');
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes
