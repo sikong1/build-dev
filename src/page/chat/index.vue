@@ -1,5 +1,6 @@
 <template>
     <div class="websocket">
+        <span>使用该功能，请拉取后端代码 本地跑起来，vercel部署的node接口线上使用不了</span>
         <!-- <textarea cols="50" rows="20" v-model="requireData"></textarea> -->
         <div class="box">
             <div class="scroll" ref="scrollRef">
