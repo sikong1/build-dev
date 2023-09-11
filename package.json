@@ -34,10 +34,12 @@
     "pinyin": "^3.0.0-alpha.5",
     "pizzip": "^3.1.4",
     "prettier": "^2.7.1",
+    "scrollreveal": "^4.0.9",
     "tesseract.js": "^4.1.0",
     "three": "^0.148.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.0",
+    "vue-waterfall-plugin-next": "^2.2.3",
     "vue3-seamless-scroll": "^2.0.1"
   },
   "devDependencies": {

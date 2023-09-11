@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-07-04 16:27:53
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-18 15:12:31
+ * @LastEditTime: 2023-09-08 14:59:56
  * @FilePath: /vue3.0-ts/src/directives/modules/skeleton.ts
  * @Description: 骨架屏指令
  */
@@ -136,7 +136,9 @@ const SkeletonItem = {
     console.log(el, binding);
     const type = getType(vnode); // 获取当前el的type
     // 删除 el
-    stateObj.value[type].list = [];
+    if (stateObj.value[type]) {
+      stateObj.value[type].list = [];
+    }
   },
 };
 

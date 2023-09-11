@@ -150,6 +150,14 @@ export default [
     meta: {
       title: "聊天对话框",
     },
+  },
+  {
+    path: "/testPage",
+    name: "testPage",
+    component: () => import("@/page/testPage/index.vue"),
+    meta: {
+      title: "测试页面",
+    },
   }
   // {
   //   path: "/gis",

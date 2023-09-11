@@ -45,7 +45,7 @@ watch(() => requireData.value, () => {
 
 onUnmounted(() => {
     //销毁组件，跳转路由时关闭webSocket连接
-    websock.close();
+    websock && websock.close();
 })
 
 //连接到webSocket
@@ -54,7 +54,7 @@ const connectWebScket = () => {
 }
 //关闭连接
 const closeConnect = () => {
-    websock.close();
+    websock && websock.close();
 }
 //连接建立之后执行send方法发送数据
 const websocketonopen = () => {
