@@ -2,13 +2,13 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-05-30 11:52:55
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-06 09:37:12
+ * @LastEditTime: 2023-11-13 16:00:50
  * @FilePath: \snow-vue\src\page\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
-    <div class="m-b-8 flex">婷
+    <div class="m-b-8 flex">
       <el-button type="primary" size="small" @click="outLogin">退出登录</el-button>
     </div>
     <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git" target="_blank">前端项目地址</a></div>
