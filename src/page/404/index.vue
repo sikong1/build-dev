@@ -1,13 +1,21 @@
+<!--
+ * @Author: sikonggpw 1327325804@qq.com
+ * @Date: 2023-06-06 20:41:14
+ * @LastEditors: sikonggpw 1327325804@qq.com
+ * @LastEditTime: 2023-11-13 16:10:55
+ * @FilePath: \snow-vue\src\page\404\index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <div class="box-404">
     404页面
     <div class="text">
-      <span class="home line" @click="goHome">
+      <el-link class="home line" @click="goHome">
         返回首页
-      </span>
-      <span class="back line" @click="goBack">
+      </el-link>
+      <el-link class="back line" @click="goBack">
         返回上一页
-      </span>
+      </el-link>
     </div>
   </div>
 </template>
