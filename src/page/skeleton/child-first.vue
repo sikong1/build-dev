@@ -1,6 +1,8 @@
 <template>
     <div class="first">
-        <img v-skeleton-item src="@/assets/images/avatar.png" alt="">
+        <div v-skeleton-item class="img">
+            <img src="@/assets/images/avatar.png" alt="">
+        </div>
         <span v-skeleton-item>13131313</span>
     </div>
 </template>
@@ -20,10 +22,14 @@ export default {
     margin-bottom: 20px;
 }
 
-img {
+.img {
     border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+img {
     width: 50px;
     height: 50px;
-    margin-bottom: 20px;
+    border-radius: 50%;
 }
 </style>

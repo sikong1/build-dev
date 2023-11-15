@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-07-14 11:42:09
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-18 10:26:49
+ * @LastEditTime: 2023-11-15 09:37:47
  * @FilePath: \snow-vue\src\page\skeleton\index.vue
  * @Description: 骨架屏
 -->
