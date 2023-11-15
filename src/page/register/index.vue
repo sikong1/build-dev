@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-06 20:33:14
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-07-07 15:39:47
+ * @LastEditTime: 2023-11-15 10:12:44
  * @FilePath: \snow-vue\src\page\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,9 +19,9 @@
             <el-form-item label="确认密码" prop="newpassword">
                 <el-input v-model="ruleForm.newpassword" type="password" />
             </el-form-item>
-            <el-form-item label="手机号" prop="phone">
+            <!-- <el-form-item label="手机号" prop="phone">
                 <el-input v-model="ruleForm.phone" />
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item>
                 <div style="margin-top: 20px">
                     <el-radio-group v-model="verifyName" size="small">
@@ -122,10 +122,11 @@ const registerClick = async () => {
 const handleLogin = async () => {
     //加密
     const key = generateRandomString(16)
-    ruleForm.password = await aesEncrypt(ruleForm.password, key)
-    ruleForm.newpassword = ''
-    ruleForm.key = key
-    const res = await register(ruleForm);
+    const obj = JSON.parse(JSON.stringify(ruleForm))
+    obj.password = await aesEncrypt(obj.password, key)
+    obj.newpassword = ''
+    obj.key = key
+    const res = await register(obj);
     if (!res.data) {
         return
     }
