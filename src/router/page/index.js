@@ -151,6 +151,14 @@ export default [
       title: "聊天对话框",
     },
   },
+  {
+    path: "/map",
+    name: "map",
+    component: () => import("@/page/baiduMap/map-box.vue"),
+    meta: {
+      title: "百度地图",
+    },
+  },
   // {
   //   path: "/gis",
   //   name: "gis",
