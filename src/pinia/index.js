@@ -8,9 +8,11 @@
  */
 import loading from "./modules/loading";
 import useUser from "./modules/user";
+import userFlie from "./modules/file";
 const useStore = () => ({
   loading: loading(),
   user: useUser(),
+  fileStore: userFlie(),
 });
 
 export default useStore;

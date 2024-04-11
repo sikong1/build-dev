@@ -175,4 +175,12 @@ export default [
   //     title: "轮播图",
   //   },
   // },
+  {
+    path: "/breakpoint-continuation",
+    name: "breakpointContinuation",
+    component: () => import("@/page/breakpoint-continuation/index.vue"),
+    meta: {
+      title: "断点续传",
+    },
+  }
 ];

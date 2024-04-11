@@ -15,7 +15,7 @@ const api = axios.create({
   baseURL: '/api',
   timeout: 20000,
   headers: {
-    'Content-Type': 'application/json;charset=UTF-8'
+    'Content-Type': 'application/json'
   }
 })
 // token白名单
@@ -60,12 +60,6 @@ api.interceptors.response.use(
           loginOut403Message()
           router.push({
             path: '/login'
-          })
-          break
-        // 404请求不存在
-        case 404:
-          router.push({
-            path: '/404'
           })
           break
       }
