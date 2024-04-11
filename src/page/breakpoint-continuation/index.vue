@@ -21,16 +21,13 @@ export default {
 <script setup>
 import useFileSizeUpload from "@/hooks/useFileSizeUpload";
 import useStore from "@/pinia";
-// import { isLoginOut } from "@/utils/login";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 const { fileUpload, postFile } = useFileSizeUpload();
 const { fileStore } = useStore();
 
-onMounted(() => {
-});
-
 const file = ref(null);
+// 点击选择文件
 const handleClick = () => {
   file.value && file.value.click();
 };

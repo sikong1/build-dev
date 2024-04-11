@@ -8,7 +8,7 @@ const useFileSizeUpload = () => {
 
     const { fileStore } = useStore()
 
-    // uploadSize: 单位: KB
+    // 开始上传   uploadSize: 单位: KB
     const fileUpload = async (file, uploadSize, callback) => {
         reuseCount.value = 0
         const chunkSize = uploadSize * 1024;
@@ -26,6 +26,7 @@ const useFileSizeUpload = () => {
         await chunkFormData(list, callback)
     }
 
+    // 分片上传
     const chunkFormData = async (list, callback) => {
         const length = list.length;
         list.forEach(async (item, index) => {
@@ -45,6 +46,7 @@ const useFileSizeUpload = () => {
         })
     }
 
+    // 获取文件切片
     const getFileList = (file, chunkSize) => {
         let start = 0;
         const list = []
@@ -57,6 +59,7 @@ const useFileSizeUpload = () => {
         return list;
     }
 
+    // 生成文件hash
     const generateFileHash = (file) => {
         return new Promise((resolve) => {
             const fileReader = new FileReader();
@@ -76,6 +79,7 @@ const useFileSizeUpload = () => {
 
     let indexArr = []
     const reuseCount = ref(0)
+    // 上传文件
     const postFile = async (formData, length) => {
         const res = await postBreakpointContinuationFile(formData);
 
@@ -92,6 +96,7 @@ const useFileSizeUpload = () => {
         }
     };
 
+    // 合并文件
     const mergeFile = async () => {
         indexArr = [];
         const { fileHash, fileName, size } = fileStore.fileData;
