@@ -105,9 +105,10 @@ const loginClick = async () => {
 const handleLogin = async () => {
   //加密
   const key = generateRandomString(16)
-  ruleForm.password = await aesEncrypt(ruleForm.password, key)
-  ruleForm.key = key
-  const res = await login(ruleForm)
+  const obj = JSON.parse(JSON.stringify(ruleForm))
+  obj.password = await aesEncrypt(ruleForm.password, key)
+  obj.key = key
+  const res = await login(obj)
   if (res.data.status === 200) {
     // 将user信息存入localStorage
     user.setUserInfo(res.data.user)
