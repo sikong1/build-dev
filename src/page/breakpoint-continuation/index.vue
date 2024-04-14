@@ -1,5 +1,7 @@
 <template>
   <div>
+    <span>请本地调试</span>
+    <hr />
     <el-button @click="handleClick">点击上传</el-button>
     <input
       type="file"
