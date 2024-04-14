@@ -19,14 +19,14 @@
       <!-- <el-form-item label="手机号" prop="phone">
         <el-input v-model="ruleForm.phone" type="phone" />
       </el-form-item> -->
-      <el-form-item>
+      <!-- <el-form-item>
         <div style="margin-top: 20px">
           <el-radio-group v-model="verifyName" size="small">
             <el-radio-button v-for="(item, index) in arr" :key="index" :label="item.name">{{ item.value
             }}</el-radio-button>
           </el-radio-group>
         </div>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button style="width: 80px;" @click="registerClick">注册</el-button>
         <el-button style="width: 80px;" type="primary" @click="loginClick">登录</el-button>
@@ -66,8 +66,8 @@ const ruleForm = reactive({
   password: '',
   phone: '',
 });
-const verifyName = ref(LoginEnum.blockPuzzle.name)
-const arr = Object.values(LoginEnum)
+const verifyName = ref(LoginEnum.clickWord.name)
+// const arr = Object.values(LoginEnum)
 
 const rules = {
   phone: [

@@ -116,3 +116,13 @@ export function generateRandomString(length) {
   }
   return result;
 }
+
+// 图片转base64
+export function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
