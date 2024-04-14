@@ -15,7 +15,7 @@
                 </div>
                 <img
                     ref="canvas"
-                    :src="'data:image/png;base64,' + pointBackImgBase"
+                    :src="pointBackImgBase"
                     alt=""
                     style="width: 100%; height: 100%; display: block"
                     @click="bindingClick ? canvasClick($event) : undefined"

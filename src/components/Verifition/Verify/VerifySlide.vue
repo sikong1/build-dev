@@ -7,7 +7,7 @@
         >
             <div :style="{ width: setSize.imgWidth, height: setSize.imgHeight }" class="verify-img-panel">
                 <img
-                    :src="'data:image/png;base64,' + backImgBase"
+                    :src="backImgBase"
                     alt=""
                     style="width: 100%; height: 100%; display: block"
                 />
@@ -61,7 +61,7 @@
                         class="verify-sub-block"
                     >
                         <img
-                            :src="'data:image/png;base64,' + blockBackImgBase"
+                            :src="blockBackImgBase"
                             alt=""
                             style="width: 100%; height: 100%; display: block; -webkit-user-drag: none"
                         />
