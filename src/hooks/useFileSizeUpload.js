@@ -89,7 +89,6 @@ const useFileSizeUpload = () => {
         indexArr.push(0)
         const i = indexArr.length;
         fileStore.setProgress((i / length * 100).toFixed(0) );
-        console.log("res", length, i);
         if (indexArr.length === length) {
             reuseCount.value && ElMessage.success("已复用" + reuseCount.value + "个分片");
             mergeFile()

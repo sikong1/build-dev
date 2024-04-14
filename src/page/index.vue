@@ -54,14 +54,10 @@ onMounted(() => {
 
 const getList = async () => {
   const res = await getApi()
-  if (res.status === 200) {
-    console.log(res, 'res');
-  }
 }
 
 const showRouter = () => {
   const routerItems = router.options.routes;
-  console.log(routerItems, 'dddd');
   const appRouter = routerItems.find((item) => item.name === 'index');
   appRouter && (routers.value = appRouter.children);
 }

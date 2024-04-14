@@ -44,7 +44,6 @@ const routes = [
     component: () => import('@/page/404'),
   },
 ]
-console.log(process.env.BASE_URL, 'process.env.BASE_URLprocess.env.BASE_URL');
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes
@@ -54,13 +53,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const { loading } = useStore();
   loading.loadingAll.open()
-  console.log(to, from, next)
   next()
 })
 
 // 后置守卫
-router.afterEach((to, from) => {
-  console.log(to, from)
+router.afterEach(() => {
   nextTick(() => {
     const { loading } = useStore();
     loading.loadingAll.close()

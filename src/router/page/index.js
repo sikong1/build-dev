@@ -1,8 +1,29 @@
+const Copy = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/copy')
+const LoadingAnimation = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/loadingAnimation')
+const DeepCopy = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/deepCopy')
+const WaterAnimation = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/waterAnimation')
+const SearchBoxAnimation = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/searchBoxAnimation')
+const Drop = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/drop')
+const TextLine = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/textLine')
+const ScrollLoading = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/scrollLoading')
+const SnowflakeFlutter = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/snowflakeFlutter')
+const Pinyin = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/pinyin')
+const Tesseract = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/tesseract')
+const EditWord = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/editWord/index.vue')
+const Wordcloud = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/wordcloud/index.vue')
+const Pyramid = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/pyramid/index.vue')
+const UrlToBase64 = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/urlToBase64/index.vue')
+const Webgpu = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/webgpu/index.vue')
+const Skeleton = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/skeleton/index.vue')
+const Chat = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/chat/index.vue')
+const BaiduMap = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/baiduMap/map-box.vue')
+const BreakpointContinuation = () => import( /* webpackChunkName: 'ImportFuncDemo' */ '@/page/breakpoint-continuation/index.vue')
+
 export default [
   {
     path: "/copy",
     name: "copy",
-    component: () => import("@/page/copy"),
+    component: Copy,
     meta: {
       title: "复制",
     },
@@ -10,7 +31,7 @@ export default [
   {
     path: "/loading-animation",
     name: "loading-animation",
-    component: () => import("@/page/loadingAnimation"),
+    component: LoadingAnimation,
     meta: {
       title: "loading动画",
     },
@@ -18,7 +39,7 @@ export default [
   {
     path: "/deep-copy",
     name: "deep-copy",
-    component: () => import("@/page/deepCopy"),
+    component: DeepCopy,
     meta: {
       title: "深拷贝",
     },
@@ -26,7 +47,7 @@ export default [
   {
     path: "/water-animation",
     name: "water-animation",
-    component: () => import("@/page/waterAnimation"),
+    component: WaterAnimation,
     meta: {
       title: "水滴动画",
     },
@@ -34,7 +55,7 @@ export default [
   {
     path: "/search-box-animation",
     name: "search-box-animation",
-    component: () => import("@/page/searchBoxAnimation"),
+    component: SearchBoxAnimation,
     meta: {
       title: "搜索框动画",
     },
@@ -42,7 +63,7 @@ export default [
   {
     path: "/drop",
     name: "drop",
-    component: () => import("@/page/drop"),
+    component: Drop,
     meta: {
       title: "拖拽",
     },
@@ -50,7 +71,7 @@ export default [
   {
     path: "/text-line",
     name: "text-line",
-    component: () => import("@/page/textLine"),
+    component: TextLine,
     meta: {
       title: "文字下划线",
     },
@@ -58,7 +79,7 @@ export default [
   {
     path: "/scroll-loading",
     name: "scroll-loading",
-    component: () => import("@/page/scrollLoading"),
+    component: ScrollLoading,
     meta: {
       title: "下拉加载更多",
     },
@@ -66,7 +87,7 @@ export default [
   {
     path: "/snowflake-flutter",
     name: "snowflake-flutter",
-    component: () => import("@/page/snowflakeFlutter"),
+    component: SnowflakeFlutter,
     meta: {
       title: "雪花飘动",
     },
@@ -74,7 +95,7 @@ export default [
   {
     path: "/pinyin",
     name: "pinyin",
-    component: () => import("@/page/pinyin"),
+    component: Pinyin,
     meta: {
       title: "中文拼音",
     },
@@ -82,7 +103,7 @@ export default [
   {
     path: "/tesseract",
     name: "tesseract",
-    component: () => import("@/page/tesseract"),
+    component: Tesseract,
     meta: {
       title: "图片文字识别功能(英文)",
     },
@@ -90,7 +111,7 @@ export default [
   {
     path: "/editWord",
     name: "editWord",
-    component: () => import("@/page/editWord/index.vue"),
+    component: EditWord,
     meta: {
       title: "动态转换word（docxtemplater实现）",
     },
@@ -106,7 +127,7 @@ export default [
   {
     path: "/wordcloud",
     name: "wordcloud",
-    component: () => import("@/page/wordcloud/index.vue"),
+    component: Wordcloud,
     meta: {
       title: "echarts词云图",
     },
@@ -114,7 +135,7 @@ export default [
   {
     path: "/pyramid",
     name: "pyramid",
-    component: () => import("@/page/pyramid/index.vue"),
+    component: Pyramid,
     meta: {
       title: "echarts三角柱状图",
     },
@@ -122,7 +143,7 @@ export default [
   {
     path: "/url-to-base64",
     name: "url-to-base64",
-    component: () => import("@/page/urlToBase64/index.vue"),
+    component: UrlToBase64,
     meta: {
       title: "图片url转base64",
     },
@@ -130,7 +151,7 @@ export default [
   {
     path: "/webgpu",
     name: "webgpu",
-    component: () => import("@/page/webgpu/index.vue"),
+    component: Webgpu,
     meta: {
       title: "webgpu",
     },
@@ -138,7 +159,7 @@ export default [
   {
     path: "/skeleton",
     name: "skeleton",
-    component: () => import("@/page/skeleton/index.vue"),
+    component: Skeleton,
     meta: {
       title: "自定义指令-骨架屏",
     },
@@ -146,7 +167,7 @@ export default [
   {
     path: "/chat",
     name: "chat",
-    component: () => import("@/page/chat/index.vue"),
+    component: Chat,
     meta: {
       title: "聊天对话框",
     },
@@ -154,7 +175,7 @@ export default [
   {
     path: "/map",
     name: "map",
-    component: () => import("@/page/baiduMap/map-box.vue"),
+    component: BaiduMap,
     meta: {
       title: "百度地图",
     },
@@ -178,7 +199,7 @@ export default [
   {
     path: "/breakpoint-continuation",
     name: "breakpointContinuation",
-    component: () => import("@/page/breakpoint-continuation/index.vue"),
+    component: BreakpointContinuation,
     meta: {
       title: "断点续传",
     },
