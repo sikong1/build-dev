@@ -237,6 +237,7 @@ export default {
                     secretKey.value = res.repData.secretKey;
                     poinTextList.value = res.repData.wordList;
                     text.value = '请依次点击【' + poinTextList.value.join(',') + '】';
+                    checkNum.value = poinTextList.value.length
                 } else {
                     text.value = res.repMsg;
                 }
