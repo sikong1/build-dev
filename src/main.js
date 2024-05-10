@@ -2,7 +2,7 @@
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-06-30 15:01:35
  * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-08-19 17:09:41
+ * @LastEditTime: 2024-05-10 17:20:38
  * @FilePath: \snow-vue\src\main.js
  * @Description: 主入口
  */
@@ -17,6 +17,8 @@ import loading from '@/components/loading/index.js'
 import 'echarts-wordcloud'
 import '@/assets/css/index.scss'
 import directives from '@/directives'
+import skeleton from 'sikong-skeleton-screen'
+
 const app = createApp(App)
 // console.log = function () { }
 // console.error = function () { }
@@ -29,6 +31,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus)
 app.use(Router)
 app.use(pinia).use(directives)
+app.use(skeleton)
 app.use(loading)
 
 app.mount('#app')
