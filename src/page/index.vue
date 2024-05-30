@@ -1,8 +1,8 @@
 <!--
  * @Author: sikonggpw 1327325804@qq.com
  * @Date: 2023-05-30 11:52:55
- * @LastEditors: sikonggpw 1327325804@qq.com
- * @LastEditTime: 2023-11-13 16:00:50
+ * @LastEditors: sikong 1327325804@qq.com
+ * @LastEditTime: 2024-05-30 14:36:12
  * @FilePath: \snow-vue\src\page\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -35,21 +35,30 @@ export default {
 </script>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { computed, onMounted, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
+import { computed, onMounted, ref, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getApi } from '@/server/modules/login.js';
 import { isLoginOut, loginOut } from '@/utils/login'
 
 const router = useRouter();
+const route = useRoute();
 
 const routers = ref([])
-let tabValue = router.currentRoute.value.path;
+let tabValue = ref(router.currentRoute.value.path);
 onMounted(() => {
-  console.log(tabValue, 'tabValue');
+  console.log(tabValue.value, 'tabValue');
   isLoginOut();
   getList();
   showRouter();
+})
+
+// 监听路由变化
+watch(() => route.path, (newVal) => {
+  const item = routers.value.find(item => routerObj.value(item).path === newVal)
+  if (item) {
+    tabValue.value = item.path
+  }
 })
 
 const getList = async () => {
