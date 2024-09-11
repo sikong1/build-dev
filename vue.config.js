@@ -31,7 +31,6 @@ module.exports = defineConfig({
     //   args[0].terserOptions.compress.drop_console = true
     //   return args
     // })
-
     //gzip压缩
     let productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
     config.plugin('CompressionPlugin').use('compression-webpack-plugin', [
