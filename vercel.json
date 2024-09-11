@@ -3,7 +3,6 @@
     {
       "src": "/api/(.*)",
       "dest": "https://cervel-node-git-main-sikong1s-projects.vercel.app/$1"
-      // "dest": "https://guopw-api.club/$1"
     }
   ]
 }
