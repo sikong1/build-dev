@@ -21,3 +21,10 @@ export const register = (data) => {
     data,
   });
 }
+export const getMongoData = (params) => {
+  return request({
+    url: "/getUserInfo",
+    method: "get",
+    params
+  })
+}

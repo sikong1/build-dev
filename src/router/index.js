@@ -16,33 +16,33 @@ import PageRouter from './page' // 页面路由
 // 路由配置
 const routes = [
   {
-    path: '/',
-    name: 'app',
-    redirect: '/index',
+    path: "/",
+    name: "app",
+    redirect: "/index"
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/page/login/index.vue'),
+    path: "/login",
+    name: "login",
+    component: () => import("@/page/login/index.vue")
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/page/register/index.vue'),
+    path: "/register",
+    name: "register",
+    component: () => import("@/page/login/index.vue")
   },
   {
-    path: '/index',
-    name: 'index',
-    component: () => import('@/page/index'),
-    redirect: '/copy',
-    children: PageRouter,
+    path: "/index",
+    name: "index",
+    component: () => import("@/page/index"),
+    redirect: "/copy",
+    children: PageRouter
   },
   {
     // 404页面，必须放在最后
-    path: '/:pathMatch(.*)*',
-    name: '404',
-    component: () => import('@/page/404'),
-  },
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: () => import("@/page/404")
+  }
 ]
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),

@@ -38,7 +38,7 @@ export default {
 import { useRouter, useRoute } from 'vue-router'
 import { computed, onMounted, ref, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getApi } from '@/server/modules/login.js';
+import { getApi, getMongoData } from '@/server/modules/login.js';
 import { isLoginOut, loginOut } from '@/utils/login'
 
 const router = useRouter();
@@ -51,7 +51,15 @@ onMounted(() => {
   isLoginOut();
   getList();
   showRouter();
+
+  getUserInfo()
 })
+
+const getUserInfo = async () => {
+  const res = await getMongoData({
+    username: "sikong"
+  })
+}
 
 // 监听路由变化
 watch(() => route.path, (newVal) => {
