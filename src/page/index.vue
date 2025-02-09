@@ -9,14 +9,32 @@
 <template>
   <div>
     <div class="m-b-8 flex">
-      <el-button type="primary" size="small" @click="outLogin">退出登录</el-button>
+      <!-- <el-button type="primary" size="small" @click="outLogin">退出登录</el-button> -->
+      <!-- <img :src="`${loginObs}/avatar.png`" alt="" class="logo" /> -->
+      <el-dropdown>
+       <!-- <span>13</span> -->
+        <img :src="`${avatarObs}/avatar-default.png`" style="width: 50px; height: 50px; border-radius: 50%;" alt="" />
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="outLogin">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="toDetails('https://github.com/sikong1/build-dev.git')">前端项目地址</el-dropdown-item>
+            <el-dropdown-item @click="toDetails('https://github.com/sikong1/cervel-node')">后端项目地址</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
-    <div class="m-b-8"><a href="https://github.com/sikong1/build-dev.git" target="_blank">前端项目地址</a></div>
-    <div class="m-b-8"><a href="https://github.com/sikong1/cervel-node" target="_blank">后端项目地址</a></div>
     <el-tabs type="border-card" @tab-click="currentRouter" v-model="tabValue">
       <router-view v-slot="{ Component }">
-        <el-tab-pane v-for="item in routers" :key="item.name" :name="routerObj(item).path" :label="routerObj(item).meta.title">
-          <component v-if="routerObj(item).path === router.currentRoute.value.path" :is="Component" />
+        <el-tab-pane
+          v-for="item in routers"
+          :key="item.name"
+          :name="routerObj(item).path"
+          :label="routerObj(item).meta.title"
+        >
+          <component
+            v-if="routerObj(item).path === router.currentRoute.value.path"
+            :is="Component"
+          />
         </el-tab-pane>
       </router-view>
     </el-tabs>
@@ -30,27 +48,28 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App"
 }
 </script>
 
 <script setup>
-import { useRouter, useRoute } from 'vue-router'
-import { computed, onMounted, ref, watch } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { getApi, getMongoData } from '@/server/modules/login.js';
-import { isLoginOut, loginOut } from '@/utils/login'
+import { useRouter, useRoute } from "vue-router"
+import { computed, onMounted, ref, watch } from "vue"
+import { ElMessage, ElMessageBox } from "element-plus"
+import { getApi, getMongoData } from "@/server/modules/login.js"
+import { isLoginOut, loginOut } from "@/utils/login"
+import { avatarObs } from "@/utils/obs.js"
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
 const routers = ref([])
-let tabValue = ref(router.currentRoute.value.path);
+let tabValue = ref(router.currentRoute.value.path)
 onMounted(() => {
-  console.log(tabValue.value, 'tabValue');
-  isLoginOut();
-  getList();
-  showRouter();
+  console.log(tabValue.value, "tabValue")
+  isLoginOut()
+  getList()
+  showRouter()
 
   getUserInfo()
 })
@@ -62,33 +81,38 @@ const getUserInfo = async () => {
 }
 
 // 监听路由变化
-watch(() => route.path, (newVal) => {
-  const item = routers.value.find(item => routerObj.value(item).path === newVal)
-  if (item) {
-    tabValue.value = item.path
+watch(
+  () => route.path,
+  (newVal) => {
+    const item = routers.value.find(
+      (item) => routerObj.value(item).path === newVal
+    )
+    if (item) {
+      tabValue.value = item.path
+    }
   }
-})
+)
 
 const getList = async () => {
   const res = await getApi()
 }
 
 const showRouter = () => {
-  const routerItems = router.options.routes;
-  const appRouter = routerItems.find((item) => item.name === 'index');
-  appRouter && (routers.value = appRouter.children);
+  const routerItems = router.options.routes
+  const appRouter = routerItems.find((item) => item.name === "index")
+  appRouter && (routers.value = appRouter.children)
 }
 
 const routerObj = computed(() => {
   return (item) => {
     if (!item.meta) {
-      return ''
+      return ""
     }
     return item
   }
 })
 
-const currentRouter = (pane ,e) => {
+const currentRouter = (pane, e) => {
   const index = pane.index
   const item = routers.value[index]
   router.push(item.path)
@@ -96,33 +120,39 @@ const currentRouter = (pane ,e) => {
 
 const outLogin = () => {
   // 退出登录确认框
-  ElMessageBox.confirm('确认退出登录吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning',
-  }).then(() => {
-    ElMessage({
-      message: '退出成功',
-      type: 'success',
-    })
-    // 清除token
-    loginOut()
-  }).catch(() => {
-    ElMessage({
-      type: 'info',
-      message: '已取消退出',
-    })
+  ElMessageBox.confirm("确认退出登录吗？", "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning"
   })
+    .then(() => {
+      ElMessage({
+        message: "退出成功",
+        type: "success"
+      })
+      // 清除token
+      loginOut()
+    })
+    .catch(() => {
+      ElMessage({
+        type: "info",
+        message: "已取消退出"
+      })
+    })
+}
+
+const toDetails = (url) => {
+  window.open(url, "_blank")
 }
 </script>
 
 <style lang="scss" scoped>
 .m-b-8 {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 </style>
