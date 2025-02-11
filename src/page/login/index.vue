@@ -200,7 +200,7 @@ const handleLogin = async () => {
   const res = await login(obj)
   if (res.data.status === 200) {
     // 将user信息存入localStorage
-    user.setUserInfo(res.data.user)
+    user.setUserInfo(res.data.userInfo)
     loginIn(res.data.token)
   } else if (res.data.status === 400) {
     ElMessage({

@@ -18,7 +18,7 @@ const routes = [
   {
     path: "/",
     name: "app",
-    redirect: "/index"
+    redirect: "/articles"
   },
   {
     path: "/login",
@@ -31,8 +31,13 @@ const routes = [
     component: () => import("@/page/login/index.vue")
   },
   {
-    path: "/index",
-    name: "index",
+    path: "/articles",
+    name: "articles",
+    component: () => import("@/page/articles/index.vue")
+  },
+  {
+    path: "/tool",
+    name: "tool",
     component: () => import("@/page/index"),
     redirect: "/copy",
     children: PageRouter

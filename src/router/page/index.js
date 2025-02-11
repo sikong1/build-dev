@@ -28,6 +28,7 @@ export default [
       title: "复制",
     },
   },
+
   {
     path: "/loading-animation",
     name: "loading-animation",
