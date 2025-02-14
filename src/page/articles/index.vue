@@ -5,12 +5,16 @@
       <el-carousel-item v-for="item in carouselItems" :key="item.id">
         <div
           class="carousel-content"
-          :style="{ backgroundImage: `url(${item.image})` }"
+          :style="{ backgroundImage: `url(${item.bgImg})` }"
         >
           <div class="carousel-text">
             <h2>{{ item.title }}</h2>
-            <p>{{ item.description }}</p>
-            <el-button type="primary" @click="readMore(item)"
+            <p>{{ item.abstract }}</p>
+            <div class="article-meta">
+              <el-tag size="small">{{ item.typeName }}</el-tag>
+              <span class="author">作者：{{ item.username }}</span>
+            </div>
+            <el-button type="primary" @click="viewArticle(item._id)"
               >阅读更多</el-button
             >
           </div>
@@ -19,23 +23,23 @@
     </el-carousel>
 
     <!-- 最新文章列表 -->
-    <div class="latest-articles">
+   <div class="articles-section">
       <h2 class="section-title">最新文章</h2>
       <el-row :gutter="20">
-        <el-col :span="8" v-for="article in latestArticles" :key="article.id">
+        <el-col :span="8" v-for="article in data" :key="article._id">
           <el-card class="article-card" :body-style="{ padding: '0px' }">
-            <img :src="article.image" class="article-image" />
+            <img :src="article.bgImg" class="article-image">
             <div class="article-content">
+              <el-tag size="small" class="article-type">{{ article.typeName }}</el-tag>
               <h3>{{ article.title }}</h3>
-              <div class="article-meta">
-                <el-icon><Calendar /></el-icon>
-                <span>{{ article.date }}</span>
+              <p class="article-abstract">{{ article.abstract }}</p>
+              <div class="article-footer">
+                <span class="author">{{ article.username }}</span>
+                <el-button type="text" @click="viewArticle(article._id)">
+                  阅读全文
+                  <el-icon class="el-icon--right"><ArrowRight /></el-icon>
+                </el-button>
               </div>
-              <p>{{ article.summary }}</p>
-              <el-button type="text" @click="readMore(article)">
-                阅读全文
-                <el-icon class="el-icon--right"><ArrowRight /></el-icon>
-              </el-button>
             </div>
           </el-card>
         </el-col>
@@ -51,59 +55,35 @@ export default {
 </script>
 
 <script setup>
-import { Calendar, ArrowRight } from "@element-plus/icons-vue"
+import { getArticlesData } from "@/server/modules/articles";
+import { ArrowRight } from "@element-plus/icons-vue"
+import { computed, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
-const carouselItems = [
-  {
-    id: 1,
-    title: "探索Vue3新特性",
-    description: "深入了解Vue3的Composition API和新的响应式系统",
-    image: "https://picsum.photos/1200/400?random=1"
-  },
-  {
-    id: 2,
-    title: "TypeScript最佳实践",
-    description: "使用TypeScript提升代码质量和开发效率",
-    image: "https://picsum.photos/1200/400?random=2"
-  },
-  {
-    id: 3,
-    title: "现代化前端工程化",
-    description: "探讨前端工程化的最新趋势和实践",
-    image: "https://picsum.photos/1200/400?random=3"
-  }
-]
+const router = useRouter()
 
-const latestArticles = [
-  {
-    id: 1,
-    title: "Vue3组件设计模式",
-    summary: "探讨Vue3中常用的组件设计模式和最佳实践...",
-    date: "2024-03-20",
-    image: "https://picsum.photos/400/200?random=4"
-  },
-  {
-    id: 2,
-    title: "TypeScript高级技巧",
-    summary: "深入理解TypeScript的类型系统和高级特性...",
-    date: "2024-03-19",
-    image: "https://picsum.photos/400/200?random=5"
-  },
-  {
-    id: 3,
-    title: "Element Plus实战",
-    summary: "使用Element Plus构建现代化的后台管理系统...",
-    date: "2024-03-18",
-    image: "https://picsum.photos/400/200?random=6"
-  }
-]
+const data = ref([])
 
-const readMore = (item) => {
-  console.log("Reading more about:", item.title)
+onMounted(() => {
+  getData()
+})
+
+const getData = async () => {
+  const res = await getArticlesData()
+
+  data.value = res.data.data
+}
+
+const carouselItems = computed(() => {
+  return data.value.slice(0, 3)
+})
+
+const viewArticle = (id) => {
+  router.push(`/article/${id}`)
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home {
   max-width: 1200px;
   margin: 0 auto;
@@ -124,11 +104,23 @@ const readMore = (item) => {
   padding: 20px;
   border-radius: 8px;
   color: white;
-  margin-bottom: 40px;
+  width: 100%;
+  margin-bottom: 70px;
 }
 
 .carousel-text h2 {
   margin: 0 0 10px 0;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.articles-section {
+  margin-top: 40px;
 }
 
 .section-title {
@@ -156,22 +148,34 @@ const readMore = (item) => {
   padding: 20px;
 }
 
-.article-meta {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #909399;
-  margin: 10px 0;
+.article-type {
+  margin-bottom: 10px;
 }
 
 .article-content h3 {
-  margin: 0;
+  margin: 10px 0;
   font-size: 18px;
   color: #303133;
 }
 
-.article-content p {
+.article-abstract {
   color: #606266;
   margin: 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.author {
+  color: #909399;
+  font-size: 14px;
 }
 </style>

@@ -126,3 +126,17 @@ export function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
+
+export const sanitizeHtml = (html) => {
+  // 定义允许的标签集合
+  const allowedTags = ["a", "b", "br", "img"]
+
+  // 使用正则表达式清洗不允许的标签
+  return html.replace(/<[^>]+?(?:>|\s*\/)/gi, (match) => {
+    const tag = match.match(/^<([^>]+?)>/)
+    if (allowedTags.includes(tag[1].toLowerCase())) {
+      return `<span class="safe">${match}</span>`
+    }
+    return ""
+  })
+}

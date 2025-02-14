@@ -16,6 +16,11 @@
             <el-menu-item index="/about">关于我</el-menu-item>
             <el-menu-item index="/tool">工具</el-menu-item>
             <el-menu-item index="/contact">联系我</el-menu-item>
+
+            <el-menu-item index="/write">
+              <el-icon><EditPen /></el-icon>
+              写博客
+            </el-menu-item>
           </div>
           <div class="right-section">
             <!-- <el-input

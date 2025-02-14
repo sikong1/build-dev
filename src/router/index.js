@@ -6,12 +6,12 @@
  * @FilePath: \snow-vue\src\router\index.js
  * @Description: 路由配置
  */
-import { createRouter, createWebHashHistory } from "vue-router";
-import { nextTick } from 'vue'
+import { createRouter, createWebHashHistory } from "vue-router"
+import { nextTick } from "vue"
 // import { ElLoading } from 'element-plus'
 // import LoadingVue from '@/components/loading/index.vue'
-import useStore from "@/pinia";
-import PageRouter from './page' // 页面路由
+import useStore from "@/pinia"
+import PageRouter from "./page" // 页面路由
 
 // 路由配置
 const routes = [
@@ -36,6 +36,16 @@ const routes = [
     component: () => import("@/page/articles/index.vue")
   },
   {
+    path: "/article/:id",
+    name: "article-detail",
+    component: () => import("@/page/articles/ArticleDetail.vue")
+  },
+  {
+    path: "/write",
+    name: "write",
+    component: () => import("@/page/write/index.vue")
+  },
+  {
     path: "/tool",
     name: "tool",
     component: () => import("@/page/index"),
@@ -52,11 +62,11 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes
-});
+})
 
 // 前置守卫 增加loading效果
 router.beforeEach((to, from, next) => {
-  const { loading } = useStore();
+  const { loading } = useStore()
   loading.loadingAll.open()
   next()
 })
@@ -64,10 +74,9 @@ router.beforeEach((to, from, next) => {
 // 后置守卫
 router.afterEach(() => {
   nextTick(() => {
-    const { loading } = useStore();
+    const { loading } = useStore()
     loading.loadingAll.close()
   })
 })
-
 
 export default router
