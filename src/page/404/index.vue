@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="box-404">
-    404页面
+    正在开发中...
     <div class="text">
       <el-link class="home line" @click="goHome">
         返回首页
