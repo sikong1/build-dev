@@ -105,7 +105,7 @@
 
       <el-form-item>
         <el-button type="primary" @click="submitForm">发布文章</el-button>
-        <el-button @click="saveDraft">保存草稿</el-button>
+        <!-- <el-button @click="saveDraft">保存草稿</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -242,11 +242,11 @@ const submitForm = async () => {
   })
 }
 
-const saveDraft = () => {
-  console.log("保存草稿:", form)
-  // TODO: 实现保存草稿逻辑
-  ElMessage.success("草稿保存成功！")
-}
+// const saveDraft = () => {
+//   console.log("保存草稿:", form)
+//   // TODO: 实现保存草稿逻辑
+//   ElMessage.success("草稿保存成功！")
+// }
 </script>
 
 <style scoped>
