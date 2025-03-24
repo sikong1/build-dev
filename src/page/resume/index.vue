@@ -96,7 +96,13 @@
         </div>
         <div class="project-achievement" v-if="project.achievement">
           <h4>项目成果：</h4>
-          <p>{{ project.achievement }}</p>
+          <p v-if="!isLink(project.achievement)">{{ project.achievement }}</p>
+          <a
+            v-else
+            :href="project.achievement"
+            target="_blank"
+            >{{project.achievement}}</a
+          >
         </div>
       </div>
     </div>
@@ -299,6 +305,10 @@ const resumeData = ref({
     "定期进行技术总结并分享至个人网站"
   ]
 })
+
+const isLink = (url) => {
+  return /^https?:\/\//.test(url)
+}
 </script>
 
 <style scoped>
