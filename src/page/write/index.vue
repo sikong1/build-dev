@@ -41,7 +41,7 @@
         <img class="articles-img" :src="form.bgImg" alt="" />
       </el-form-item>
 
-      <el-form-item label="文章摘要" prop="abstract">
+      <el-form-item label="文章摘要">
         <el-input
           v-model="form.abstract"
           type="textarea"
@@ -181,15 +181,15 @@ const rules = reactive({
     }
   ],
   type: [{ required: true, message: "请选择文章分类", trigger: "change" }],
-  abstract: [
-    { required: true, message: "请输入文章摘要", trigger: "blur" },
-    {
-      min: 10,
-      max: 300,
-      message: "摘要长度应在10到300个字符之间",
-      trigger: "blur"
-    }
-  ],
+  // abstract: [
+  //   { required: true, message: "请输入文章摘要", trigger: "blur" },
+  //   {
+  //     min: 10,
+  //     max: 300,
+  //     message: "摘要长度应在10到300个字符之间",
+  //     trigger: "blur"
+  //   }
+  // ],
   content: [
     { required: true, message: "请输入文章内容", trigger: "blur" },
     { min: 10, message: "文章内容至少100个字符", trigger: "blur" }
