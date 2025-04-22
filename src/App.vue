@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="app-container">
-      <header class="header">
+      <header class="header" v-if="!isLogin">
         <el-menu
           :default-active="route.path"
           :router="true"
@@ -57,7 +57,7 @@
           </div>
         </el-menu>
       </header>
-      <div style="padding-top: 90px">
+      <div :style="{ paddingTop: isLogin ? '0' : '90px' }">
         <router-view></router-view>
       </div>
     </div>
@@ -70,10 +70,15 @@ import { useRoute } from "vue-router"
 import { ElMessage, ElMessageBox } from "element-plus"
 import { loginOut } from "@/utils/login"
 import useStore from "@/pinia"
+import { computed } from "vue"
 
 const { user } = useStore()
 
 const route = useRoute()
+
+const isLogin = computed(() => {
+  return route.path === "/login"
+})
 
 const outLogin = () => {
   // 退出登录确认框
