@@ -19,7 +19,7 @@
 
     <div class="article-container">
       <div class="article-content">
-        <p class="abstract">{{ article.abstract }}</p>
+        <!-- <p class="abstract">{{ article.abstract }}</p> -->
         <div class="content markdown-body" v-html="renderedContent"></div>
         <!-- <div class="content markdown-body" v-html=article.content></div> -->
       </div>

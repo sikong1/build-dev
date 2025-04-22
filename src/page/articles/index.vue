@@ -9,7 +9,7 @@
         >
           <div class="carousel-text">
             <h2>{{ item.title }}</h2>
-            <p>{{ item.abstract }}</p>
+            <!-- <p>{{ item.abstract }}</p> -->
             <div class="article-meta">
               <el-tag size="small">{{ item.typeName }}</el-tag>
               <span class="author">作者：{{ item.username }}</span>
@@ -32,7 +32,7 @@
             <div class="article-content">
               <el-tag size="small" class="article-type">{{ article.typeName }}</el-tag>
               <h3>{{ article.title }}</h3>
-              <p class="article-abstract">{{ article.abstract }}</p>
+              <!-- <p class="article-abstract">{{ article.abstract }}</p> -->
               <div class="article-footer">
                 <span class="author">{{ article.username }}</span>
                 <el-button type="text" @click="viewArticle(article._id)">
