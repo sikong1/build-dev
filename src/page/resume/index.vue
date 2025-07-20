@@ -21,7 +21,7 @@
       >
         <h3>{{ edu.school }}</h3>
         <div class="edu-details">
-          <span>{{ edu.duration }}</span>
+          <!-- <span>{{ edu.duration }}</span> -->
           <span>{{ edu.degree }}</span>
         </div>
       </div>
@@ -135,14 +135,8 @@ const resumeData = ref({
 
   education: [
     {
-      school: "九江职业技术学院",
-      duration: "2018.9 - 2021.7",
-      degree: "软件技术（大专）"
-    },
-    {
       school: "福建师范大学",
-      duration: "2024.1 - 2027.7",
-      degree: "本科（在读）"
+      degree: "计算机科学与技术"
     }
   ],
 
