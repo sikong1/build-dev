@@ -97,12 +97,9 @@
         <div class="project-achievement" v-if="project.achievement">
           <h4>项目成果：</h4>
           <p v-if="!isLink(project.achievement)">{{ project.achievement }}</p>
-          <a
-            v-else
-            :href="project.achievement"
-            target="_blank"
-            >{{project.achievement}}</a
-          >
+          <a v-else :href="project.achievement" target="_blank">{{
+            project.achievement
+          }}</a>
         </div>
       </div>
     </div>
@@ -166,25 +163,24 @@ const resumeData = ref({
 
   workExperience: [
     {
-      company: "西安微智创想信息科技有限公司",
+      company: "广州中国电信研究院",
       position: "前端开发工程师",
-      duration: "2021.1 - 2022.3",
+      duration: "2024.6 - 至今",
       responsibilities: [
-        "基于 HTML5/CSS3 等开发经验参与项目研发和技术研究工作",
-        "负责相关产品的需求以及前端程序的实现，提供合理的前端架构。改进和优化开发工具、开发流程、和开发框架",
-        "与产品、后台开发人员保持良好沟通，能快速理解、消化各方需求，并落实为具体的开发工作"
+        "负责开发 VS Code 及 JetBrains IDE 系列工具的 AI 插件 Webview 视图模块，支撑智能代码解释、代码安全扫描等 AI 功能在 IDE 环境中的集成",
+        "主导插件前端架构优化，通过重构底层渲染逻辑提升性能 40%，并实现与内置开发工具及 MCP（模块化通信协议）服务的无缝对接"
       ]
     },
     {
       company: "福建国科信息科技有限公司",
       position: "前端开发工程师",
-      duration: "2022.4 - 2023.9",
+      duration: "2022.4 - 2024.6",
       responsibilities: [
         "负责对 UI 的原型图进行还原，组件封装、业务逻辑化、模块重构",
         "解决业务遇到的痛点和难点，基于sonar代码进行review",
         "负责但不限于 Web 页面开发、Web App 开发、H5 开发、小程序开发等相关前端研发工作",
-        "个人获得年度最佳新员工奖",
-        "统筹3人团队任务分配与敏捷开发流程"
+        "负责构建高质量的通用型，并编写详细的使用文档和示例代码，同时为使用方提供全面的技术支持，包括文档说明、示例演示以及针对实际问题的逐步解决方案",
+        "个人获得年度最佳新员工奖"
       ]
     },
     {
@@ -202,19 +198,23 @@ const resumeData = ref({
 
   projects: [
     {
-      title: "主题编辑器（npm 包）",
-      techStack: ["Vue2", "CubeDesignWeb", "Webpack"],
-      description:
-        "主题编辑器能够将组件库的组件样式进行修改并能实时观察当前样式状态，能导入json主题配置、下载组件样式sass文件和主题编辑器的json配置文件，使页面主题修改起来更便捷",
-      responsibilities: [
-        "结合原型生成json数据结构，参考设计文档定义组件的入参、处理逻辑、返回数据结构等规范，实现页面构建",
-        "实现了 iframe 样式与编辑器展示效果的实时通信功能",
-        "集成打包工具，使主题编辑器能够以script方式引入并使用",
-        "通过优化样式渲染逻辑，提升了样式渲染效率，并有效缓解了首次渲染多个模块时的页面卡顿问题",
-        "撰写详细的开发者文档和相关代码示例，帮助开发者快速理解并使用我们的主题编辑器"
+      title: "AI 插件 Webview 视图开发（VS Code/JetBrains）",
+      techStack: [
+        "Vue3",
+        "TypeScript",
+        "@arco-design/web-vue",
+        "vite",
+        "pinia",
+        "VS Code Extension API"
       ],
-      achievement:
-        "完成设计与实现，并将其应用于组件库的官方文档和示例项目中，确保优雅、高效地集成到各种页面布局和交互场景中，为用户提供更优质的体验，同时为开发者提供清晰的代码示例和使用指导，支持持续更新和改进"
+      description:
+        "为 VS Code 和 JetBrains IDE 开发轻量级 AI 插件，通过 Webview 技术构建交互式视图界面，支持自然语言指令解析、代码生成建议、代码安全扫描、实时调试工具集成等功能，提升开发者效率",
+      responsibilities: [
+        "性能优化：统一处理工具调用、数据通信及错误反馈，确保插件与 IDE 底层能力的稳定交互",
+        "工程化改进： 封装可复用的 React Hooks 模块集，包括useHtmlRenderer Hook：将 AI 返回的 Markdown/JSON 数据实时转换为安全可渲染的 HTML 元素，支持语法高亮、交互式按钮嵌入等扩展功能",
+        "核心功能开发：实现 MCP 工具调用返回数据的实时可视化模块，通过 WebSocket 流式传输 AI 响应数据，提供低延迟的用户交互体验"
+      ],
+      achievement: "插件名为 CodeFree"
     },
     {
       title:
@@ -227,7 +227,7 @@ const resumeData = ref({
         "开发 UST 插件与 API 替换方案：针对鸿蒙环境下的组件适配问题，采用 API 替换及 UST（ArkUI 组件库）插件开发方式，确保组件功能完整性；",
         "优化与测试：对 86 个组件进行了适配，修复了渲染异常、交互失效等问题，并持续关注 Uniapp 官方升级动态，以优化适配方案；",
         "提升用户体验：通过优化后，组件在鸿蒙系统中的兼容性显著提升，为公司在鸿蒙生态市场的拓展奠定了基础；"
-      ],
+      ]
       // achievement: ""
     },
     {
