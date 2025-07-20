@@ -130,7 +130,7 @@ const resumeData = ref({
   name: "郭鹏伟",
   phone: "187-7061-7978",
   email: "guopengwei1999@163.com",
-  age: "25岁",
+  age: "26岁",
   hometown: "江西吉安",
 
   education: [
