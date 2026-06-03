@@ -130,7 +130,7 @@ const resumeData = ref({
   name: "郭鹏伟",
   phone: "187-7061-7978",
   email: "guopengwei1999@163.com",
-  age: "26岁",
+  age: "27岁",
   hometown: "江西吉安",
 
   education: [
@@ -169,7 +169,7 @@ const resumeData = ref({
     {
       company: "福建国科信息科技有限公司",
       position: "前端开发工程师",
-      duration: "2022.4 - 2024.6",
+      duration: "2022.4 - 2025.2",
       responsibilities: [
         "负责对 UI 的原型图进行还原，组件封装、业务逻辑化、模块重构",
         "解决业务遇到的痛点和难点，基于sonar代码进行review",
@@ -181,7 +181,7 @@ const resumeData = ref({
     {
       company: "广州中国电信研究院",
       position: "前端开发工程师",
-      duration: "2024.6 - 至今",
+      duration: "2025.5 - 至今",
       responsibilities: [
         "负责开发 VS Code 及 JetBrains IDE 系列工具的 AI 插件 Webview 视图模块，支撑智能代码解释、代码安全扫描等 AI 功能在 IDE 环境中的集成",
         "主导插件前端架构优化，通过重构底层渲染逻辑提升性能 40%，并实现与内置开发工具及 MCP（模块化通信协议）服务的无缝对接"
@@ -198,14 +198,16 @@ const resumeData = ref({
         "@arco-design/web-vue",
         "vite",
         "pinia",
-        "VS Code Extension API"
+        "VS Code Extension API",
+        "WebSocket"
       ],
       description:
-        "为 VS Code 和 JetBrains IDE 开发轻量级 AI 插件，通过 Webview 技术构建交互式视图界面，支持自然语言指令解析、代码生成建议、代码安全扫描、实时调试工具集成等功能，提升开发者效率",
+        "为 VS Code 和 JetBrains IDE 开发轻量级 AI 插件，通过 Webview 技术构建交互式视图界面，支持自然语言指令解析、代码生成建议、代码安全扫描及实时调试工具(涵盖 MCP、Skill、Agent、自定义规则)，提升开发者效率",
       responsibilities: [
-        "性能优化：统一处理工具调用、数据通信及错误反馈，确保插件与 IDE 底层能力的稳定交互",
-        "工程化改进： 封装可复用的 React Hooks 模块集，包括useHtmlRenderer Hook：将 AI 返回的 Markdown/JSON 数据实时转换为安全可渲染的 HTML 元素，支持语法高亮、交互式按钮嵌入等扩展功能",
-        "核心功能开发：实现 MCP 工具调用返回数据的实时可视化模块，通过 WebSocket 流式传输 AI 响应数据，提供低延迟的用户交互体验"
+        "工程化改进：统一处理工具调用、数据通信及错误反馈，确保插件与 IDE 底层能力的稳定交互",
+        "性能优化：封装可复用 Hooks 模块集，核心包含 useHtmlRenderer Hook —— 将模型返回的 Markdown/JSON 实时转换为虚拟 DOM，实现流式渲染，支持语法高亮、交互式按钮等扩展，显著提升内容呈现性能",
+        "项目架构优化：搭建 Webview 本地热更新环境，实现视图实时预览与模块热替换，大幅缩短调试周期，提升开发效率",
+        "核心功能开发：开发MCP工具调用数据的实时可视化面板，通过 WebSocket 流式传输模型响应，打造低延迟、流畅的用户交互体验"
       ],
       achievement: "插件名为 CodeFree"
     },
