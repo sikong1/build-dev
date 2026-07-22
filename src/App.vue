@@ -78,7 +78,8 @@ const { user } = useStore()
 const route = useRoute()
 
 const isLogin = computed(() => {
-  return route.path === "/login"
+  const hasHiddenrouters = ['/login', '/register']
+  return hasHiddenrouters.includes(`${route.path}`)
 })
 
 const outLogin = () => {
