@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://guopw-api.club/$1"
+      "dest": "https://guopw-api.cloud/$1"
     }
   ]
 }
