@@ -141,18 +141,18 @@ const resumeData = ref({
   ],
 
   skills: [
-    "掌握 HTML5、CSS3、JS(ES6+)、TS 等前端基础知识，能够编写结构良好、易维护的代码",
-    "掌握 sass、less 等 css 预处理器，能够编写结构清晰、易读、易维护的层级样式结构",
-    "精通 Vue.js 框架，深入理解其核心原理；熟悉 React技术栈",
+    "熟练掌握 HTML5、CSS3、JS(ES6+)、TS 等前端基础知识，能够编写结构良好、易维护的代码",
+    "熟练掌握 sass、less 等 css 预处理器，能够编写结构清晰、易读、易维护的层级样式结构",
+    "熟练掌握 Vue.js 技术体系，深入理解 Vue2/Vue3 核心机制；了解 React 技术栈，具备组件化开发经验",
     "具备使用 vue+ts，有使用ts+vue3开发的经验",
     "能够基于uni-app进行小程序/APP/H5的开发",
-    "熟悉 Element-ui、iview、vant、uview、bootstrap 等 UI 组件库的使用，可结合前端主流框架完成单页面应用的组件化开发",
-    "熟悉 Echarts.js的各种图表运用、WebGis、高德地图，能够快速构建可视化数据大屏",
-    "熟悉 Linux/Nginx 运维，掌握环境部署及配置管理",
-    "熟悉 Git 的使用，能够有效地进行版本控制和团队协作",
-    "注重代码质量，推行 ESLint/Prettier 规范，主导 Code Review 及内部风格指南编写",
-    "了解 webpack、vite 前端模块化构建工具",
-    "了解 nodejs、mysql，能够基于 express 框架编写简单接口"
+    "熟练使用 Element-ui、iview、vant、uview、bootstrap 等 UI 组件库，可结合前端主流框架完成单页面应用的组件化开发",
+    "熟练使用 Echarts.js的各种图表、WebGis、高德地图，能够快速构建可视化数据大屏",
+    "熟练使用 Linux/Nginx，掌握环境部署及配置管理",
+    "熟练使用 Git，pnpm/npm 等开发工具，具备团队协作、代码管理、分支管理及版本发布经验",
+    "注重代码质量，推行 ESLint/Prettier 规范，具备 Code Review、公共组件沉淀及团队规范建设经验",
+    "熟悉 webpack、vite 前端模块化构建工具",
+    "掌握 nodejs、mysql，能够基于 express 框架编写简单接口"
   ],
 
   workExperience: [
@@ -182,7 +182,7 @@ const resumeData = ref({
     {
       company: "广州中国电信研究院",
       position: "前端开发工程师",
-      duration: "2024.6 - 2026.6",
+      duration: "2024.5 - 2026.6",
       responsibilities: [
         "负责开发 VS Code 及 JetBrains IDE 系列工具的 AI 插件 Webview 视图模块，支撑智能代码解释、代码安全扫描等 AI 功能在 IDE 环境中的集成",
         "主导插件前端架构优化，通过重构底层渲染逻辑提升性能 40%，并实现与内置开发工具及 MCP（模块化通信协议）服务的无缝对接"
@@ -200,12 +200,14 @@ const resumeData = ref({
         "vite",
         "pinia",
         "VS Code Extension API",
-        "WebSocket"
+        "WebSocket",
+        "Markdown-it",
+        "Highlight.js"
       ],
       description:
         "为 VS Code 和 JetBrains IDE 开发轻量级 AI 插件，通过 Webview 技术构建交互式视图界面，支持自然语言指令解析、代码生成建议、代码安全扫描及实时调试工具(涵盖 MCP、Skill、Agent、自定义规则)，提升开发者效率",
       responsibilities: [
-        "工程化改进：统一处理工具调用、数据通信及错误反馈，确保插件与 IDE 底层能力的稳定交互",
+        "插件架构设计：基于 Vue3 + TypeScript 构建 Webview 前端应用架构，实现 IDE 插件端与 Webview 视图层解耦；设计统一通信机制，封装 IDE API 调用、消息分发、状态同步及异常处理流程，提升插件扩展性与稳定性；",
         "性能优化：封装可复用 Hooks 模块集，核心包含 useHtmlRenderer Hook —— 将模型返回的 Markdown/JSON 实时转换为虚拟 DOM，实现流式渲染，支持语法高亮、交互式按钮等扩展，显著提升内容呈现性能",
         "项目架构优化：搭建 Webview 本地热更新环境，实现视图实时预览与模块热替换，大幅缩短调试周期，提升开发效率",
         "核心功能开发：开发MCP工具调用数据的实时可视化面板，通过 WebSocket 流式传输模型响应，打造低延迟、流畅的用户交互体验"

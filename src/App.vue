@@ -42,7 +42,7 @@
                   <el-dropdown-item @click="outLogin"
                     >退出登录</el-dropdown-item
                   >
-                  <el-dropdown-item
+                  <!-- <el-dropdown-item
                     @click="
                       toDetails('https://github.com/sikong1/build-dev.git')
                     "
@@ -51,7 +51,7 @@
                   <el-dropdown-item
                     @click="toDetails('https://github.com/sikong1/cervel-node')"
                     >后端项目地址</el-dropdown-item
-                  >
+                  > -->
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -78,7 +78,7 @@ const { user } = useStore()
 const route = useRoute()
 
 const isLogin = computed(() => {
-  const hasHiddenrouters = ['/login', '/register']
+  const hasHiddenrouters = ["/login", "/register"]
   return hasHiddenrouters.includes(`${route.path}`)
 })
 
