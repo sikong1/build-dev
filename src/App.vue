@@ -105,9 +105,9 @@ const outLogin = () => {
     })
 }
 
-const toDetails = (url) => {
-  window.open(url, "_blank")
-}
+// const toDetails = (url) => {
+//   window.open(url, "_blank")
+// }
 </script>
 
 <style lang="scss" scoped>
