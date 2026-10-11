@@ -27,6 +27,8 @@ const baseUrl =
   process.env.NODE_ENV === "production"
     ? process.env.VUE_APP_API_URL
     : "http://localhost:3000"
+
+console.log("baseUrl", baseUrl)
 module.exports = defineConfig({
   transpileDependencies: true, // 默认为false, 如果你需要使用babel转译第三方包,需要设置为true
   chainWebpack(config) {
@@ -87,8 +89,8 @@ module.exports = defineConfig({
     proxy: {
       "/api": {
         // target: 'http://localhost:3000',
-        target: baseUrl,
-        // target: 'https://guopw-api.cloud',
+        // target: baseUrl,
+        target: "https://guopw-api.cloud",
         changeOrigin: true,
         ws: true,
         pathRewrite: {
