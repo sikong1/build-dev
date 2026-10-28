@@ -22,7 +22,7 @@
     </div>
 
     <!-- 对话区 -->
-    <div class="chat-body" ref="bodyRef">
+    <div class="chat-body" ref="bodyRef" @scroll="onScroll">
       <div class="empty-tip" v-if="messages.length === 0">
         <div class="robot">🤖</div>
         <p>我是郭鹏伟的 AI 面试助手</p>
@@ -36,6 +36,7 @@
           <div class="md" v-if="m.role === 'ai'" v-html="renderMd(m.content)"></div>
           <div v-else>{{ m.content }}</div>
           <span class="cursor" v-if="m.role === 'ai' && m.streaming"></span>
+          <span class="stopped-tag" v-if="m.role === 'ai' && m.stopped">· 已停止</span>
         </div>
       </div>
 
@@ -55,7 +56,8 @@
         @keyup.enter="send"
       >
         <template #append>
-          <el-button :loading="sending" @click="send" class="send-btn">发送</el-button>
+          <el-button v-if="sending" @click="stop" class="stop-btn">停止</el-button>
+          <el-button v-else @click="send" class="send-btn">发送</el-button>
         </template>
       </el-input>
       <p class="hint">回答由 GLM-4-Flash 生成，基于候选人知识库检索，可能不完美，仅供参考</p>
@@ -79,6 +81,10 @@ const sending = ref(false)
 const errorMsg = ref("")
 const articleCount = ref("")
 const bodyRef = ref(null)
+// 滚动跟随状态：默认跟随底部；用户上翻时暂停，滚回底部自动恢复
+const stickToBottom = ref(true)
+// AbortController：用于停止大模型输出
+let abortCtrl = null
 
 const suggestions = [
   { icon: "👋", q: "介绍一下候选人郭鹏伟" },
@@ -92,12 +98,21 @@ function renderMd(text) {
   return marked.parse(text || "")
 }
 
-// 滚动到底部
+// 内容更新时：仅在用户处于底部时自动滚到底（用户上翻则暂停跟随）
 watch(messages, () => {
-  nextTick(() => {
-    bodyRef.value && (bodyRef.value.scrollTop = bodyRef.value.scrollHeight)
-  })
+  if (stickToBottom.value) {
+    nextTick(() => {
+      bodyRef.value && (bodyRef.value.scrollTop = bodyRef.value.scrollHeight)
+    })
+  }
 })
+
+// 监听滚动：用户手动上翻 → 暂停跟随；滚回底部附近 → 恢复跟随
+function onScroll() {
+  const el = bodyRef.value
+  if (!el) return
+  stickToBottom.value = el.scrollHeight - el.scrollTop - el.clientHeight < 60
+}
 
 // 快捷提问
 function quickAsk(q) {
@@ -110,6 +125,9 @@ async function send() {
   const q = question.value.trim()
   if (!q || sending.value) return
 
+  // 用户主动发送：视为想看到新内容，恢复自动跟随并滚到底
+  stickToBottom.value = true
+
   messages.value.push({ role: "user", content: q })
   messages.value.push({ role: "ai", content: "", streaming: true })
   question.value = ""
@@ -117,10 +135,13 @@ async function send() {
   errorMsg.value = ""
 
   try {
+    // 创建本次请求的 abort 控制器，供「停止」按钮中断
+    abortCtrl = new AbortController()
     const resp = await fetch("/api/ai/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: q })
+      body: JSON.stringify({ question: q }),
+      signal: abortCtrl.signal
     })
 
     if (!resp.ok) {
@@ -162,12 +183,33 @@ async function send() {
       aiMsg.content = "（未获得有效回答，请稍后重试）"
     }
   } catch (err) {
-    errorMsg.value = err.message
-    const aiMsg = messages.value[messages.value.length - 1]
-    if (aiMsg && aiMsg.streaming) aiMsg.streaming = false
+    // 用户点击「停止」：AbortError 属正常中断，静默处理
+    if (err && err.name === "AbortError") {
+      const aiMsg = messages.value[messages.value.length - 1]
+      if (aiMsg && aiMsg.streaming) aiMsg.streaming = false
+    } else {
+      errorMsg.value = err.message
+      const aiMsg = messages.value[messages.value.length - 1]
+      if (aiMsg && aiMsg.streaming) aiMsg.streaming = false
+    }
   } finally {
     sending.value = false
+    abortCtrl = null
   }
+}
+
+// 停止大模型输出：中断 SSE 连接，后端监听到断开会自动取消智谱上游流
+function stop() {
+  if (abortCtrl) {
+    abortCtrl.abort()
+    abortCtrl = null
+  }
+  const last = messages.value[messages.value.length - 1]
+  if (last && last.role === "ai") {
+    last.streaming = false
+    last.stopped = true
+  }
+  sending.value = false
 }
 
 onMounted(async () => {
@@ -406,6 +448,18 @@ onMounted(async () => {
     background: linear-gradient(135deg, #409eff, #7c4dff);
     color: #fff;
     border: none;
+  }
+
+  .stop-btn {
+    background: #f56c6c;
+    color: #fff;
+    border: none;
+  }
+
+  .stopped-tag {
+    font-size: 12px;
+    color: #c0c4cc;
+    margin-left: 4px;
   }
 
   .hint {
