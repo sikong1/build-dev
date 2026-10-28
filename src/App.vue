@@ -14,6 +14,7 @@
           <div class="menu-items">
             <el-menu-item index="/">文章</el-menu-item>
             <el-menu-item index="/about">关于我</el-menu-item>
+            <el-menu-item index="/ai" class="ai-menu">AI 面试助手</el-menu-item>
             <el-menu-item index="/tool">工具</el-menu-item>
             <el-menu-item index="/contact">联系我</el-menu-item>
 
@@ -111,6 +112,10 @@ const outLogin = () => {
 </script>
 
 <style lang="scss" scoped>
+.ai-menu {
+  color: #7c4dff !important;
+  font-weight: 600;
+}
 .app-container {
   height: calc(100vh - 60px);
   display: flex;
