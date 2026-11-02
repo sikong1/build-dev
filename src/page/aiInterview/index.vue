@@ -99,13 +99,18 @@ function renderMd(text) {
 }
 
 // 内容更新时：仅在用户处于底部时自动滚到底（用户上翻则暂停跟随）
-watch(messages, () => {
-  if (stickToBottom.value) {
-    nextTick(() => {
-      bodyRef.value && (bodyRef.value.scrollTop = bodyRef.value.scrollHeight)
-    })
+// 注意：必须监听 content 拼接串而非 messages 数组本身——
+// 流式是修改数组内元素的属性，浅监听 watch 不会触发
+watch(
+  () => messages.value.map(m => m.content).join("|"),
+  () => {
+    if (stickToBottom.value) {
+      nextTick(() => {
+        bodyRef.value && (bodyRef.value.scrollTop = bodyRef.value.scrollHeight)
+      })
+    }
   }
-})
+)
 
 // 监听滚动：用户手动上翻 → 暂停跟随；滚回底部附近 → 恢复跟随
 function onScroll() {
@@ -311,6 +316,7 @@ onMounted(async () => {
 /* 对话区 */
 .chat-body {
   flex: 1;
+  min-height: 0; /* 关键：允许 flex 收缩，内容超高时触发内部滚动而非撑高页面 */
   overflow-y: auto;
   padding: 12px 4px;
   display: flex;
